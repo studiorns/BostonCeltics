@@ -1,0 +1,1753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boston Celtics Sponsorship | Department of Culture and Tourism - Abu Dhabi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Hide tooltip elements as they're not being used */
+        .tooltip-overlay, .tooltip, .tooltip-close {
+            display: none !important;
+        }
+        
+        /* SONER Logo Animation */
+        @keyframes sonerScan { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes sonerBlip { 0%, 20%, 100% { opacity: 0; } 2%, 15% { opacity: 1; } 3% { transform: scale(1.2); } }
+        
+        /* SONER Logo styles */
+        .soner-logo { display: flex; align-items: center; color: white; font-family: 'Inter', sans-serif; font-size: 28px; font-weight: 300; }
+        .soner-radar { width: 24px; height: 24px; border-radius: 50%; border: 1px solid white; margin: 0 3px; position: relative; background-color: rgba(255, 255, 255, 0.05); overflow: hidden; }
+        .soner-scanner { position: absolute; top: 0; left: 0; width: 100%; height: 100%; animation: sonerScan 4s linear infinite; transform-origin: center; }
+        .soner-scanner::before { content: ''; position: absolute; top: 0; left: 50%; width: 50%; height: 50%; background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.4)); transform-origin: bottom left; clip-path: polygon(0 0, 100% 0, 0 100%); }
+        .soner-scanner::after { content: ''; position: absolute; top: 0; left: 50%; width: 50%; height: 1px; background: linear-gradient(90deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 1)); transform-origin: left center; box-shadow: 0 0 4px rgba(255, 255, 255, 0.8); }
+        .soner-blip { position: absolute; width: 2px; height: 2px; background-color: white; border-radius: 50%; opacity: 0; box-shadow: 0 0 4px white; }
+        .soner-blip:nth-child(1) { top: 25%; left: 30%; animation: sonerBlip 4s 1s infinite; }
+        .soner-blip:nth-child(2) { top: 65%; left: 60%; animation: sonerBlip 4s 2.5s infinite; }
+        .soner-tagline { color: white; font-size: 8px; text-transform: uppercase; font-weight: 500; letter-spacing: 0.5em; margin-left: 10px; opacity: 0.8; }
+        
+        :root {
+            --primary: #007A33; /* Celtics green */
+            --primary-light: #103821; /* Dark green for backgrounds */
+            --primary-dark: #00A94F; /* Light green for text */
+            --secondary: #FFFFFF; /* Celtics white */
+            --secondary-light: #1A1A1A; /* Dark white/gray for backgrounds */
+            --secondary-dark: #FFFFFF; /* White for text */
+            --accent: #BA9653; /* Celtics gold accent */
+            --gray-100: #1e1e1e;
+            --gray-200: #2d2d2d;
+            --gray-300: #3d3d3d;
+            --gray-400: #4d4d4d;
+            --gray-500: #777777;
+            --gray-600: #a0a0a0;
+            --gray-700: #c0c0c0;
+            --gray-800: #e0e0e0;
+            --gray-900: #f0f0f0;
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 6px 12px rgba(0, 0, 0, 0.5);
+            --radius: 8px;
+            --radius-md: 12px;
+            --transition: all 0.3s ease;
+            --bg-color: #000000;
+            --card-bg: #121212;
+            --section-bg: #181818;
+            --sidebar-width: 280px;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--gray-800);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--gray-900);
+            font-weight: 600;
+        }
+        
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        a:hover {
+            color: var(--primary-dark);
+        }
+        
+        /* Layout */
+        .app-container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--gray-100);
+            border-right: 1px solid var(--gray-300);
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 100;
+        }
+        
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            min-height: 100vh;
+        }
+        
+        .content-wrapper {
+            padding: 30px;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary), #004C1F);
+            color: white;
+            padding: 32px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Sidebar Navigation */
+        .sidebar-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--gray-300);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .sidebar-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--gray-800);
+        }
+        
+        .nav-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            color: var(--gray-700);
+            border-left: 3px solid transparent;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        
+        .nav-link:hover {
+            background-color: var(--gray-200);
+            color: var(--gray-900);
+        }
+        
+        .nav-link.active {
+            border-left-color: var(--primary);
+            background-color: var(--gray-200);
+            color: var(--primary);
+        }
+        
+        .nav-link i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* Section Styles */
+        .section {
+            background-color: var(--section-bg);
+            border-radius: var(--radius-md);
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid var(--gray-300);
+            transition: var(--transition);
+        }
+        
+        .section:hover {
+            box-shadow: var(--shadow-md);
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--gray-200);
+            padding-bottom: 15px;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title i {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+        
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        
+        /* Data Card */
+        .data-card {
+            background-color: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 24px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-300);
+            transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .data-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-3px);
+        }
+        
+        .data-card h4 {
+            border-bottom: 1px solid var(--gray-200);
+            padding-bottom: 12px;
+            margin-bottom: 16px;
+            color: var(--gray-800);
+            display: flex;
+            align-items: center;
+            min-height: 60px; /* Added fixed minimum height to ensure consistent HR line positioning */
+        }
+        
+        .data-card h4 i {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+        
+        /* List styling to keep items inside cards */
+        .data-card ul {
+            list-style-position: inside;
+            padding-left: 0;
+            margin-bottom: 0;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            word-break: break-word;
+        }
+        
+        .data-card li {
+            margin-bottom: 10px;
+            padding-left: 5px;
+            text-indent: -5px;
+        }
+        
+        .data-card li:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* Insight Summary */
+        .insight-summary {
+            background-color: var(--primary-light);
+            border-left: 4px solid var(--primary);
+            padding: 20px 24px;
+            margin-bottom: 28px;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            position: relative;
+        }
+        
+        .insight-summary h3 {
+            color: var(--primary-dark);
+            margin-bottom: 12px;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .insight-summary h3 i {
+            margin-right: 10px;
+        }
+        
+        /* Strategy Summary - Blue styling for strategy sections */
+        .strategy-summary {
+            background-color: var(--secondary-light);
+            border-left: 4px solid var(--secondary);
+            padding: 20px 24px;
+            margin-bottom: 28px;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            position: relative;
+        }
+        
+        .strategy-summary h3 {
+            color: var(--secondary-dark);
+            margin-bottom: 12px;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .strategy-summary h3 i {
+            margin-right: 10px;
+        }
+        
+        /* Executive Summary */
+        .executive-summary {
+            background: linear-gradient(135deg, var(--primary-light), var(--secondary-light));
+            border-radius: var(--radius-md);
+            padding: 30px;
+            margin-bottom: 30px;
+            position: relative;
+            border: 1px solid var(--gray-300);
+        }
+        
+        .summary-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .summary-title i {
+            margin-right: 10px;
+        }
+        
+        .key-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .key-metric {
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: var(--radius);
+            padding: 15px;
+            text-align: center;
+            transition: var(--transition);
+        }
+        
+        .key-metric:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .key-metric-value {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin: 15px 0;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(0, 122, 51, 0.3);
+            letter-spacing: -0.5px;
+            line-height: 1.1;
+            transition: var(--transition);
+        }
+        
+        .key-metric:hover .key-metric-value {
+            transform: scale(1.05);
+        }
+        
+        .key-metric-label {
+            font-size: 0.9rem;
+            color: var(--gray-700);
+            font-weight: 500;
+        }
+        
+        /* Change indicator styles */
+        .change {
+            display: flex;
+            align-items: center;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: var(--transition);
+            position: relative;
+            margin: -10px auto 15px;
+            justify-content: center;
+            width: fit-content;
+        }
+        
+        .change i {
+            margin-right: 4px;
+            font-size: 0.75rem;
+        }
+        
+        .positive { 
+            background-color: var(--secondary-light); 
+            color: var(--secondary-dark);
+        }
+        
+        .negative { 
+            background-color: rgba(244, 67, 54, 0.2); 
+            color: #F44336;
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 122, 51, 0.4);
+            transition: var(--transition);
+        }
+        
+        .back-to-top:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0, 122, 51, 0.5);
+        }
+        
+        /* Data Card Expansion Styles */
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            min-height: 60px; /* Fixed height for consistent alignment */
+        }
+        
+        .metric-name {
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+            color: var(--gray-800);
+            flex: 1;
+        }
+        
+        .metric-name i {
+            margin-right: 8px;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+        
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-align: center;
+            margin: 20px auto 15px;
+            padding: 10px 15px;
+            background: linear-gradient(135deg, rgba(0, 122, 51, 0.1), rgba(0, 0, 0, 0));
+            border-radius: var(--radius);
+            border-left: 3px solid var(--primary);
+            text-shadow: 0 0 10px rgba(0, 122, 51, 0.2);
+            transition: var(--transition);
+            display: block;
+            letter-spacing: -0.5px;
+            line-height: 1;
+            position: relative;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .data-card:hover .metric-value {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, rgba(0, 122, 51, 0.15), rgba(0, 0, 0, 0));
+        }
+        
+        .expand-toggle {
+            background: transparent;
+            border: none;
+            color: var(--primary);
+            cursor: pointer;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            padding: 0;
+        }
+        
+        .expand-toggle:hover {
+            background-color: rgba(0, 122, 51, 0.1);
+            transform: scale(1.1);
+        }
+        
+        .expand-toggle:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0, 122, 51, 0.3);
+        }
+        
+        .expand-toggle i {
+            transition: transform 0.3s ease;
+        }
+        
+        .expand-toggle.expanded i {
+            transform: rotate(180deg);
+        }
+        
+        .card-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease, margin 0.3s ease;
+            opacity: 0;
+            margin-top: 0;
+            border-top: 0px solid var(--gray-300);
+        }
+        
+        .card-details.expanded {
+            max-height: 300px;
+            opacity: 1;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--gray-300);
+        }
+        
+        .details-title {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .card-details p {
+            margin-bottom: 8px;
+            font-size: 14px;
+            line-height: 1.5;
+            color: var(--gray-700);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .mobile-toggle {
+                display: block !important;
+            }
+            
+            .grid-2, .grid-3 {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            
+            .tooltip {
+                width: 95%;
+                padding: 20px;
+                font-size: 15px;
+            }
+            
+            .tooltip-title {
+                font-size: 16px;
+            }
+            
+            /* Data Card Mobile Optimizations */
+            .data-card {
+                padding: 16px;
+                margin-bottom: 16px;
+            }
+            
+            .data-card ul {
+                padding-left: 0;
+            }
+            
+            .data-card li {
+                padding-left: 3px;
+                text-indent: -3px;
+                font-size: 0.95rem;
+                line-height: 1.4;
+            }
+            
+            .data-card h4 {
+                font-size: 1.05rem;
+                padding-bottom: 10px;
+                margin-bottom: 12px;
+            }
+            
+            .card-header {
+                min-height: auto;
+                margin-bottom: 6px;
+                flex-wrap: wrap;
+            }
+            
+            .metric-name {
+                font-size: 0.9rem;
+                line-height: 1.3;
+            }
+            
+            .metric-value {
+                font-size: 2rem;
+                margin: 12px auto 10px;
+                padding: 8px 10px;
+            }
+            
+            .change {
+                margin: -8px auto 10px;
+                font-size: 0.8rem;
+                padding: 3px 8px;
+            }
+            
+            .expand-toggle {
+                width: 32px;
+                height: 32px;
+            }
+            
+            .content-wrapper {
+                padding: 20px 15px;
+            }
+            
+            .section {
+                padding: 20px;
+                margin-bottom: 24px;
+            }
+            
+            .insight-summary {
+                padding: 16px 20px;
+                margin-bottom: 20px;
+            }
+            
+            .insight-summary h3 {
+                font-size: 1.15rem;
+                margin-bottom: 10px;
+            }
+        }
+        
+        /* Additional styles for even smaller screens */
+        @media (max-width: 480px) {
+            .content-wrapper {
+                padding: 15px 12px;
+            }
+            
+            .section {
+                padding: 16px;
+                margin-bottom: 20px;
+            }
+            
+            .data-card {
+                padding: 14px;
+            }
+            
+            .data-card h4 {
+                font-size: 1rem;
+            }
+            
+            .data-card ul {
+                padding-left: 0;
+            }
+            
+            .data-card li {
+                padding-left: 2px;
+                text-indent: -2px;
+                font-size: 0.9rem;
+                line-height: 1.3;
+                margin-bottom: 8px;
+            }
+            
+            .metric-name {
+                font-size: 0.85rem;
+            }
+            
+            .metric-value {
+                font-size: 1.75rem;
+                margin: 10px auto 8px;
+                padding: 6px 8px;
+            }
+            
+            .card-details p {
+                font-size: 0.9rem;
+                line-height: 1.4;
+            }
+            
+            .details-title {
+                font-size: 0.95rem;
+            }
+            
+            .insight-summary {
+                padding: 14px;
+                margin-bottom: 16px;
+            }
+            
+            .insight-summary h3 {
+                font-size: 1.1rem;
+                margin-bottom: 8px;
+            }
+            
+            .insight-summary p {
+                font-size: 0.95rem;
+                line-height: 1.5;
+            }
+        }
+        
+        /* Footer Styles */
+        .footer {
+            background-color: var(--gray-100);
+            padding: 20px 0;
+            text-align: center;
+            border-top: 1px solid var(--gray-300);
+            margin-top: 40px;
+            width: 100%;
+            max-width: 1280px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+        
+        .footer p {
+            color: var(--gray-600);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .footer {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .footer {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-title">Dashboard Navigation</div>
+            </div>
+            <nav>
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#overview" class="nav-link active">
+                            <i class="fas fa-home"></i> Overview
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#methodology" class="nav-link">
+                            <i class="fas fa-clipboard-list"></i> Methodology
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#fan-behavior" class="nav-link">
+                            <i class="fas fa-users"></i> Fan Behavior
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#sponsorship-awareness" class="nav-link">
+                            <i class="fas fa-chart-line"></i> Sponsorship Awareness
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#sponsorship-brand-comparison" class="nav-link">
+                            <i class="fas fa-trophy"></i> Sponsorship Brand Comparison
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#destination-awareness" class="nav-link">
+                            <i class="fas fa-globe"></i> Impact on Destination Awareness
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#fan-engagement" class="nav-link">
+                            <i class="fas fa-handshake"></i> Fan Engagement
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#insights" class="nav-link">
+                            <i class="fas fa-lightbulb"></i> Insights & Recommendations
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+        
+        <!-- Mobile Navigation Toggle -->
+        <button class="mobile-toggle" id="mobileToggle" style="display: none; position: fixed; top: 20px; left: 20px; z-index: 101; background-color: var(--primary); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 18px; cursor: pointer; align-items: center; justify-content: center; box-shadow: var(--shadow-md);">
+            <i class="fas fa-bars"></i>
+        </button>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+                    <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 15px;">
+                        <a href="https://studiorns.github.io/DCTMarketAnalysisRepository/">
+                            <div class="soner-logo">
+                                S<div class="soner-radar">
+                                    <div class="soner-scanner"></div>
+                                    <div class="soner-blip"></div>
+                                    <div class="soner-blip"></div>
+                                </div>NER
+                                <span class="soner-tagline">Visual Intelligence</span>
+                            </div>
+                        </a>
+                    </div>
+                    <h1>Boston Celtics Sponsorship</h1>
+                    <h2 style="font-size: 1.3rem; margin-top: 5px; font-weight: 500;">Department of Culture and Tourism - Abu Dhabi</h2>
+                    <p>Comprehensive Sponsorship Impact Analysis 2023-2025</p>
+                </div>
+            </header>
+            
+            <div class="content-wrapper">
+                <!-- Executive Summary -->
+                <section id="overview" class="executive-summary">
+                    <h2 class="summary-title"><i class="fas fa-chart-pie"></i> Overview</h2>
+                    <p>The Abu Dhabi sponsorship with the Boston Celtics has shown significant impact across key metrics. This dashboard presents a comprehensive analysis of the sponsorship's performance and strategic recommendations for optimization.</p>
+                </section>
+                
+                <!-- Study Methodology -->
+                <section id="methodology" class="section">
+                    <div class="section-header">
+                        <h2 class="section-title"><i class="fas fa-clipboard-list"></i> Study Methodology</h2>
+                    </div>
+                    
+                    <div class="insight-summary">
+                        <h3><i class="fas fa-info-circle"></i> Research Overview</h3>
+                        <p>The Abu Dhabi sponsorship with the Boston Celtics was officially announced on January 25, 2024. This dashboard presents the results of a comprehensive impact assessment study conducted over multiple waves to track the sponsorship's effectiveness.</p>
+                    </div>
+                    
+                    <div class="grid-3">
+                        <div class="data-card">
+                            <h4><i class="fas fa-calendar-alt"></i> Survey Timing</h4>
+                            <ul>
+                                <li><strong>Baseline Pre-Launch</strong>: Dec '23</li>
+                                <li><strong>POST-Launch</strong>: May '24</li>
+                                <li><strong>2025 Wave</strong>: March '25</li>
+                                <li><strong>Measurement Period</strong>: Approximately 15 months across all waves</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="data-card">
+                            <h4><i class="fas fa-users"></i> Sample Characteristics</h4>
+                            <ul>
+                                <li><strong>Target Audience</strong>: New England USA residents</li>
+                                <li><strong>Sample Size</strong>: N=800 for baseline & post launch wave | N=1000 for 2025 wave</li>
+                                <li><strong>Regions Covered</strong>: Connecticut, Maine, Massachusetts, New Hampshire, Rhode Island, Vermont</li>
+                                <li><strong>Cities Included</strong>: Boston, Brockton, Cambridge, Lowell, Lynn, New Bedford, Quincy, Springfield, Worcester</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="data-card">
+                            <h4><i class="fas fa-chart-bar"></i> Analysis Approach</h4>
+                            <ul>
+                                <li><strong>Longitudinal Analysis</strong>: Key metrics tracked across three measurement waves</li>
+                                <li><strong>Segmentation</strong>: Analysis conducted between Boston Celtics fans and non-fans</li>
+                                <li><strong>Engagement Tracking</strong>: Multiple touchpoints measured across awareness and engagement metrics</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Fan Behavior -->
+                <section id="fan-behavior" class="section">
+                    <div class="section-header">
+                        <h2 class="section-title"><i class="fas fa-users"></i> How, Where & When Boston Celtics Fans Engage</h2>
+                    </div>
+                    
+                    <div class="insight-summary">
+                        <h3><i class="fas fa-lightbulb"></i> Fan Behavior Overview</h3>
+                        <p>Understanding how Boston Celtics fans consume basketball content and engage with sponsors provides valuable insights for optimizing sponsorship activations. The data reveals distinct viewing patterns and engagement channels that characterize the fan base.</p>
+                    </div>
+                    
+                    <div class="grid-3">
+                        <div class="data-card">
+                            <h4><i class="fas fa-tv"></i> Viewing Preferences</h4>
+                            <ul>
+                                <li><strong>Watch Regardless of Teams</strong>: 26% of Celtics fans watch basketball matches regardless of which team is playing</li>
+                                <li><strong>Watch Multiple Teams</strong>: 46% watch matches of all teams they follow</li>
+                                <li><strong>Team-Specific Viewing</strong>: 28% exclusively watch Boston Celtics matches</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="data-card">
+                            <h4><i class="fas fa-clock"></i> Viewing Frequency</h4>
+                            <ul>
+                                <li><strong>Daily Viewers</strong>: 8% of Celtics fans watch basketball every day</li>
+                                <li><strong>4-5 Times Weekly</strong>: 36% watch multiple times per week</li>
+                                <li><strong>2-3 Times Weekly</strong>: 39% watch a few times per week</li>
+                                <li><strong>Once Weekly or Less</strong>: 17% watch less frequently</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="data-card">
+                            <h4><i class="fas fa-map-marker-alt"></i> Viewing Locations</h4>
+                            <ul>
+                                <li><strong>TV at Home/Friend's Place</strong>: 73% of Celtics fans</li>
+                                <li><strong>In-Stadium (Live)</strong>: 55% of Celtics fans</li>
+                                <li><strong>Sports Bar/Cafe</strong>: 38% of Celtics fans</li>
+                                <li><strong>Mobile/Laptop/Tablet</strong>: 24% of Celtics fans</li>
+                                <li><strong>Radio/Audio Commentary</strong>: 10% of Celtics fans</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="grid-3">
+                        <div class="data-card">
+                            <h4><i class="fas fa-plane-departure"></i> Likelihood of Travelling Overseas for Pre-Season Matches</h4>
+                            <ul>
+                                <li><strong>Travel Interest</strong>: 15% of Boston Celtics fans expressed likelihood to travel overseas for pre-season matches</li>
+                                <li><strong>In-Stadium Connection</strong>: Fans who attend games in-person (55%) show higher propensity to travel to Abu Dhabi</li>
+                                <li><strong>Opportunity</strong>: Target the 55% of in-stadium attendees with exclusive travel packages and experiences</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="data-card">
+                            <h4><i class="fas fa-star"></i> Top Awareness Channels</h4>
+                            <ul>
+                                <li><strong>Social Media Posts</strong>: 36% (primary awareness driver)</li>
+                                <li><strong>In-stadium Signage/Screens</strong>: 21% (strong physical presence)</li>
+                                <li><strong>TV Ads</strong>: 21% (significant impact)</li>
+                                <li><strong>Team Merchandise</strong>: 18% (consistent visibility)</li>
+                                <li><strong>Experience Abu Dhabi Website</strong>: 7% (digital engagement)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="data-card">
+                            <h4><i class="fas fa-user"></i> Favorite Players</h4>
+                            <ul>
+                                <li><strong>Jayson Tatum</strong>: 28% (top player)</li>
+                                <li><strong>Larry Bird</strong>: 16%</li>
+                                <li><strong>Bill Russell</strong>: 11%</li>
+                                <li><strong>Derrick White</strong>: 10%</li>
+                                <li><strong>Kevin Garnett</strong>: 8%</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="strategy-summary" style="background-color: #103821; border-left: 4px solid #BA9653; padding: 24px 28px; margin-bottom: 30px; border-radius: 0 var(--radius) var(--radius) 0; box-shadow: var(--shadow-md);">
+                        <h3 style="color: #FFFFFF; margin-bottom: 15px; font-size: 1.3rem;"><i class="fas fa-lightbulb" style="color: #BA9653;"></i> Fan Behavior Insights</h3>
+                        <p style="font-weight: 500; margin-bottom: 15px; color: #FFFFFF;"><strong>Four key behavioral patterns emerge from our analysis:</strong></p>
+                        <ol style="padding-left: 20px; margin-bottom: 0; color: #FFFFFF;">
+                            <li style="margin-bottom: 12px; padding-left: 5px;"><strong style="color: #00A94F;">Content Consumption Beyond Team Loyalty:</strong> 72% of Celtics fans consume basketball content beyond just Celtics games, with 46% watching multiple teams and 26% watching regardless of teams playing. This indicates fans have broader basketball interests that extend beyond single-team loyalty.</li>
+                            <li style="margin-bottom: 12px; padding-left: 5px;"><strong style="color: #00A94F;">Multi-Context Viewing Habits:</strong> Engagement occurs across diverse contexts, with high-frequency viewers (44% watching 4+ times weekly) distributing their attention across in-stadium experiences (55%), sports bar social viewing (38%), and home viewing (73%).</li>
+                            <li style="margin-bottom: 12px; padding-left: 5px;"><strong style="color: #00A94F;">Travel Interest Correlation:</strong> The 15% of fans expressing overseas travel interest show a significant correlation with in-stadium attendance (55%), suggesting that experiential fans who prioritize live games are more likely to consider destination travel for basketball events.</li>
+                            <li style="margin-bottom: 0; padding-left: 5px;"><strong style="color: #00A94F;">Channel-Specific Engagement Patterns:</strong> Fan awareness is primarily driven through social media (36%), with secondary touchpoints through in-stadium presence (21%), TV advertising (21%), and team merchandise (18%). Player affinity is concentrated around Jayson Tatum (28%) and legacy players like Larry Bird (16%).</li>
+                        </ol>
+                    </div>
+                </section>
+                
+                <!-- Sponsorship Awareness Section -->
+                <section id="sponsorship-awareness" class="section">
+                    <div class="section-header">
+                        <h2 class="section-title"><i class="fas fa-chart-line"></i> Sponsorship Awareness Growth</h2>
+                    </div>
+                    
+                    <div class="insight-summary">
+                        <h3><i class="fas fa-lightbulb"></i> Key Awareness Insights</h3>
+                        <p style="color: white;">The Abu Dhabi-Boston Celtics partnership shows clear acceleration across measurement waves, with brand recognition growing most strongly in the recent period. The data confirms this sponsorship is generating progressively stronger returns as it matures in the New England market.</p>
+                    </div>
+                    
+                    <!-- Timeline Visualization Card -->
+                    <div style="background: var(--card-bg); border-radius: var(--radius-md); padding: 30px; margin-bottom: 30px; border: 1px solid var(--gray-300); box-shadow: var(--shadow-md); position: relative; overflow: hidden;">
+                        
+                        <h3 style="color: var(--gray-800); margin-bottom: 20px; font-size: 1.3rem; display: flex; align-items: center; position: relative; z-index: 2;">
+                            <i class="fas fa-chart-line" style="color: var(--primary); margin-right: 12px; font-size: 1.1em;"></i> Awareness Growth Timeline
+                        </h3>
+                        
+                        <!-- Timeline Visualization -->
+                        <div style="position: relative; height: 200px; margin: 30px 0; z-index: 2; padding: 0 5%;">
+                            <!-- Timeline Labels (Moved to top) -->
+                            <div style="position: absolute; top: 0; left: 10%; text-align: center; width: 120px; transform: translateX(-50%);">
+                                <div style="font-weight: 700; font-size: 1rem; color: var(--gray-800); margin-bottom: 4px;">Dec 2023</div>
+                                <div style="font-size: 0.85rem; color: var(--gray-600); background-color: rgba(0,0,0,0.1); padding: 2px 8px; border-radius: 10px; display: inline-block;">Pre-Launch</div>
+                            </div>
+                            
+                            <div style="position: absolute; top: 0; left: 45%; text-align: center; width: 120px; transform: translateX(-50%);">
+                                <div style="font-weight: 700; font-size: 1rem; color: var(--gray-800); margin-bottom: 4px;">May 2024</div>
+                                <div style="font-size: 0.85rem; color: var(--gray-600); background-color: rgba(0,0,0,0.1); padding: 2px 8px; border-radius: 10px; display: inline-block;">Mid-point</div>
+                            </div>
+                            
+                            <div style="position: absolute; top: 0; left: 90%; text-align: center; width: 120px; transform: translateX(-50%);">
+                                <div style="font-weight: 700; font-size: 1rem; color: var(--gray-800); margin-bottom: 4px;">Mar 2025</div>
+                                <div style="font-size: 0.85rem; color: var(--gray-600); background-color: rgba(0,0,0,0.1); padding: 2px 8px; border-radius: 10px; display: inline-block;">Latest Wave</div>
+                            </div>
+                            
+                            <!-- Timeline Line with Gradient (Moved down) -->
+                            <div style="position: absolute; top: 80px; left: 0; right: 0; height: 6px; background: linear-gradient(90deg, rgba(0,122,51,0.3), rgba(0,169,79,0.8)); border-radius: 3px; box-shadow: 0 2px 8px rgba(0,122,51,0.2);"></div>
+                            
+                            <!-- Timeline Points with Animation (Moved down) -->
+                            <div style="position: absolute; top: 68px; left: 10%; width: 30px; height: 30px; background: linear-gradient(135deg, #007A33, #00A94F); border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 3; box-shadow: 0 0 15px rgba(0,122,51,0.5); transition: transform 0.3s ease; transform: translateX(-50%);">
+                                <span style="color: white; font-size: 0.8rem; font-weight: bold;">1%</span>
+                            </div>
+                            
+                            <div style="position: absolute; top: 68px; left: 45%; width: 30px; height: 30px; background: linear-gradient(135deg, #007A33, #00A94F); border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 3; box-shadow: 0 0 15px rgba(0,122,51,0.5); transition: transform 0.3s ease; transform: translateX(-50%);">
+                                <span style="color: white; font-size: 0.8rem; font-weight: bold;">6%</span>
+                            </div>
+                            
+                            <div style="position: absolute; top: 68px; left: 90%; width: 30px; height: 30px; background: linear-gradient(135deg, #007A33, #00A94F); border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 3; box-shadow: 0 0 15px rgba(0,122,51,0.5); transition: transform 0.3s ease; transform: translateX(-50%);">
+                                <span style="color: white; font-size: 0.8rem; font-weight: bold;">21%</span>
+                            </div>
+                            
+                            <!-- Growth Indicators with Enhanced Styling (Moved down) -->
+                            <div style="position: absolute; top: 120px; left: 27%; text-align: center; width: 120px; background-color: rgba(0,122,51,0.1); padding: 8px 12px; border-radius: 12px; border-left: 3px solid var(--primary); transform: translateX(-50%);">
+                                <div style="font-weight: 700; font-size: 1.1rem; color: var(--primary-dark);">+5pp</div>
+                                <div style="font-size: 0.85rem; color: var(--gray-700);">7 months</div>
+                                <div style="font-size: 0.75rem; color: var(--gray-600);">0.7pp/month</div>
+                            </div>
+                            
+                            <div style="position: absolute; top: 120px; left: 67%; text-align: center; width: 120px; background-color: rgba(0,122,51,0.15); padding: 8px 12px; border-radius: 12px; border-left: 3px solid var(--primary); box-shadow: 0 3px 10px rgba(0,0,0,0.1); transform: translateX(-50%);">
+                                <div style="font-weight: 700; font-size: 1.1rem; color: var(--primary-dark);">+15pp</div>
+                                <div style="font-size: 0.85rem; color: var(--gray-700);">10 months</div>
+                                <div style="font-size: 0.75rem; color: var(--gray-600);">1.5pp/month</div>
+                            </div>
+                            
+                            <!-- Growth Rate Comparison Arrow removed as it was confusing -->
+                        </div>
+                        
+                        <p style="color: var(--gray-800); font-size: 1rem; text-align: center; margin-top: 15px; background-color: rgba(0,122,51,0.1); padding: 10px 15px; border-radius: 8px; font-weight: 500; position: relative; z-index: 2;">
+                            The timeline shows accelerating growth, with a <strong style="color: var(--primary); font-size: 1.1em;">3× increase in growth rate</strong> during the second period.
+                        </p>
+                        </section>
+                
+                <!-- Sponsorship Brand Comparison Section -->
+                <section id="sponsorship-brand-comparison" class="section">
+                    <div class="section-header">
+                        <h2 class="section-title"><i class="fas fa-trophy"></i> Sponsorship Brand Comparison</h2>
+                    </div>
+                    
+                    <div class="insight-summary">
+                        <h3><i class="fas fa-lightbulb"></i> Key Brand Awareness Insights</h3>
+                        <p>Analysis of brand sponsorship awareness among Boston Celtics fans reveals a competitive landscape with distinct tiers of recognition. Abu Dhabi has shown remarkable growth to become a Tier 1 sponsor alongside established brands like TD Bank, while other sponsors show varying levels of recognition and growth patterns.</p>
+                    </div>
+                    
+                    <!-- Sponsorship Tiers Analysis -->
+                    <div style="background: var(--card-bg); border-radius: var(--radius-md); padding: 30px; margin-bottom: 30px; border: 1px solid var(--gray-300); box-shadow: var(--shadow-md);">
+                        <h3 style="color: var(--gray-800); margin-bottom: 20px; font-size: 1.3rem; display: flex; align-items: center;">
+                            <i class="fas fa-layer-group" style="color: var(--primary); margin-right: 12px;"></i> Sponsorship Awareness Tiers (2025)
+                        </h3>
+                        
+                        <!-- Tier 1 -->
+                        <div style="background: linear-gradient(90deg, rgba(0,122,51,0.15), rgba(0,0,0,0)); border-radius: var(--radius); padding: 20px; margin-bottom: 20px; border-left: 4px solid var(--primary);">
+                            <h4 style="color: var(--primary); margin-bottom: 15px; font-size: 1.1rem;">Tier 1: Elite Recognition (>20%)</h4>
+                            <div class="grid-2" style="grid-template-columns: repeat(2, 1fr); gap: 15px;">
+                                <div style="background: rgba(0,0,0,0.2); border-radius: var(--radius); padding: 15px; display: flex; align-items: center; justify-content: space-between;">
+                                    <span style="font-weight: 600; color: var(--gray-800);">TD Bank</span>
+                                    <span style="font-weight: 700; font-size: 1.2rem; color: var(--primary);">34%</span>
+                                </div>
+                                <div style="background: rgba(0,0,0,0.2); border-radius: var(--radius); padding: 15px; display: flex; align-items: center; justify-content: space-between;">
+                                    <span style="font-weight: 600; color: var(--gray-800);">Abu Dhabi</span>
+                                    <span style="font-weight: 700; font-size: 1.2rem; color: var(--primary);">21%</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Tier 2 -->
+                        <div style="background: linear-gradient(90deg, rgba(186,150,83,0.15), rgba(0,0,0,0)); border-radius: var(--radius); padding: 20px; margin-bottom: 20px; border-left: 4px solid #BA9653;">
+                            <h4 style="color: #BA9653; margin-bottom: 15px; font-size: 1.1rem;">Tier 2: Strong Recognition (10-20%)</h4>
+                            <div class="grid-2" style="grid-template-columns: repeat(2, 1fr); gap: 15px;">
+                                <div style="background: rgba(0,0,0,0.2); border-radius: var(--radius); padding: 15px; display: flex; align-items: center; justify-content: space-between;">
+                                    <span style="font-weight: 600; color: var(--gray-800);">Vistaprint</span>
+                                    <span style="font-weight: 700; font-size: 1.2rem; color: #BA9653;">12%</span>
+                                </div>
+                                <div style="background: rgba(0,0,0,0.2); border-radius: var(--radius); padding: 15px; display: flex; align-items: center; justify-content: space-between;">
+                                    <span style="font-weight: 600; color: var(--gray-800);">JetBlue</span>
+                                    <span style="font-weight: 700; font-size: 1.2rem; color: #BA9653;">12%</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Tier 3 -->
+                        <div style="background: linear-gradient(90deg, rgba(255,255,255,0.1), rgba(0,0,0,0)); border-radius: var(--radius); padding: 20px; margin-bottom: 20px; border-left: 4px solid var(--gray-600);">
+                            <h4 style="color: var(--gray-600); margin-bottom: 15px; font-size: 1.1rem;">Tier 3: Moderate Recognition (5-9%)</h4>
+                            <div class="grid-3" style="grid-template-columns: repeat(3, 1fr); gap: 15px;">
+                                <div style="background: rgba(0,0,0,0.2); border-radius: var(--radius); padding: 15px; display: flex; align-items: center; justify-content: space-between;">
+                                    <span style="font-weight: 600; color: var(--gray-800);">Nike</span>
+                                    <span style="font-weight: 700; font-size: 1.2rem; color: var(--gray-600);">9%</span>
+                                </div>
+                                <div style="background: rgba(0,0,0,0.2); border-radius: var(--radius); padding: 15px; display: flex; align-items: center; justify-content: space-between;">
+                                    <span style="font-weight: 600; color: var(--gray-800);">General Electric</span>
+                                    <span style="font-weight: 700; font-size: 1.2rem; color: var(--gray-600);">7%</span>
+                                </div>
+                                <div style="background: rgba(0,0,0,0.2); border-radius: var(--radius); padding: 15px; display: flex; align-items: center; justify-content: space-between;">
+                                    <span style="font-weight: 600; color: var(--gray-800);">Gatorade</span>
+                                    <span style="font-weight: 700; font-size: 1.2rem; color: var(--gray-600);">6%</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Tier 4 -->
+                        <div style="background: linear-gradient(90deg, rgba(255,255,255,0.05), rgba(0,0,0,0)); border-radius: var(--radius); padding: 20px; border-left: 4px solid var(--gray-400);">
+                            <h4 style="color: var(--gray-400); margin-bottom: 15px; font-size: 1.1rem;">Tier 4: Emerging Recognition (<5%)</h4>
+                            <div class="grid-3" style="grid-template-columns: repeat(3, 1fr); gap: 15px;">
+                                <div style="background: rgba(0,0,0,0.2); border-radius: var(--radius); padding: 15px; display: flex; align-items: center; justify-content: space-between;">
+                                    <span style="font-weight: 600; color: var(--gray-800);">Dunkin</span>
+                                    <span style="font-weight: 700; font-size: 1.2rem; color: var(--gray-400);">5%</span>
+                                </div>
+                                <div style="background: rgba(0,0,0,0.2); border-radius: var(--radius); padding: 15px; display: flex; align-items: center; justify-content: space-between;">
+                                    <span style="font-weight: 600; color: var(--gray-800);">Bentley University</span>
+                                    <span style="font-weight: 700; font-size: 1.2rem; color: var(--gray-400);">4%</span>
+                                </div>
+                                <div style="background: rgba(0,0,0,0.2); border-radius: var(--radius); padding: 15px; display: flex; align-items: center; justify-content: space-between;">
+                                    <span style="font-weight: 600; color: var(--gray-800);">Draftkings</span>
+                                    <span style="font-weight: 700; font-size: 1.2rem; color: var(--gray-400);">4%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                        <!-- Growth Analysis -->
+                    <div style="background: var(--card-bg); border-radius: var(--radius-md); padding: 30px; margin-bottom: 30px; border: 1px solid var(--gray-300); box-shadow: var(--shadow-md);">
+                        <h3 style="color: var(--gray-800); margin-bottom: 20px; font-size: 1.3rem; display: flex; align-items: center;">
+                            <i class="fas fa-chart-line" style="color: var(--primary); margin-right: 12px;"></i> Sponsorship Growth Patterns (Wave 2 → Wave 3)
+                        </h3>
+                        
+                        <div style="background-color: rgba(0,122,51,0.1); padding: 15px; border-radius: 8px; margin-bottom: 20px; position: relative; z-index: 2; border-left: 3px solid var(--primary);">
+                            <p style="color: var(--gray-800); font-size: 0.95rem; margin: 0; font-weight: 500;">
+                                <i class="fas fa-info-circle" style="color: var(--primary); margin-right: 8px;"></i>
+                                This analysis focuses on the most recent growth period (May '24 to March '25) to provide actionable insights on current sponsorship dynamics after initial activation.
+                            </p>
+                        </div>
+                        
+                        <!-- Growth Categories -->
+                        <div class="grid-2" style="margin-bottom: 30px;">
+                            <!-- Breakthrough Performers -->
+                            <div style="background: linear-gradient(135deg, rgba(0,122,51,0.1), rgba(0,0,0,0.1)); border-radius: var(--radius); padding: 20px; border: 1px solid var(--gray-300);">
+                                <h4 style="color: var(--primary); margin-bottom: 15px; font-size: 1.1rem; display: flex; align-items: center;">
+                                    <i class="fas fa-rocket" style="margin-right: 8px;"></i> Breakthrough Performers
+                                </h4>
+                                <ul style="list-style-type: none; padding: 0; margin: 0;">
+                                    <li style="margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--gray-300);">
+                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                                            <span style="font-weight: 600; color: var(--gray-800);">Abu Dhabi</span>
+                                            <span style="font-weight: 700; color: var(--primary);">+15pp</span>
+                                        </div>
+                                        <div style="height: 8px; background: var(--gray-300); border-radius: 4px; overflow: hidden;">
+                                            <div style="height: 100%; width: 95%; background: linear-gradient(90deg, var(--primary), var(--primary-dark));"></div>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between; margin-top: 5px; font-size: 0.9rem; color: var(--gray-600);">
+                                            <span>6% → 21%</span>
+                                            <span>+250% growth</span>
+                                        </div>
+                                        <div style="font-size: 0.8rem; color: var(--gray-500); margin-top: 5px; font-style: italic;">Full journey: 1% → 6% → 21% (+2000% overall)</div>
+                                    </li>
+                                    <li style="margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--gray-300);">
+                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                                            <span style="font-weight: 600; color: var(--gray-800);">TD Bank</span>
+                                            <span style="font-weight: 700; color: var(--primary);">+16pp</span>
+                                        </div>
+                                        <div style="height: 8px; background: var(--gray-300); border-radius: 4px; overflow: hidden;">
+                                            <div style="height: 100%; width: 95%; background: linear-gradient(90deg, var(--primary), var(--primary-dark));"></div>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between; margin-top: 5px; font-size: 0.9rem; color: var(--gray-600);">
+                                            <span>18% → 34%</span>
+                                            <span>+89% growth</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                                            <span style="font-weight: 600; color: var(--gray-800);">JetBlue</span>
+                                            <span style="font-weight: 700; color: var(--primary);">+9pp</span>
+                                        </div>
+                                        <div style="height: 8px; background: var(--gray-300); border-radius: 4px; overflow: hidden;">
+                                            <div style="height: 100%; width: 55%; background: linear-gradient(90deg, var(--primary), var(--primary-dark));"></div>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between; margin-top: 5px; font-size: 0.9rem; color: var(--gray-600);">
+                                            <span>3% → 12%</span>
+                                            <span>+300% growth</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Declining Performers -->
+                            <div style="background: linear-gradient(135deg, rgba(244,67,54,0.1), rgba(0,0,0,0.1)); border-radius: var(--radius); padding: 20px; border: 1px solid var(--gray-300);">
+                                <h4 style="color: #F44336; margin-bottom: 15px; font-size: 1.1rem; display: flex; align-items: center;">
+                                    <i class="fas fa-arrow-trend-down" style="margin-right: 8px;"></i> Declining Performers
+                                </h4>
+                                <ul style="list-style-type: none; padding: 0; margin: 0;">
+                                    <li style="margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--gray-300);">
+                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                                            <span style="font-weight: 600; color: var(--gray-800);">Vistaprint</span>
+                                            <span style="font-weight: 700; color: #F44336;">-6pp</span>
+                                        </div>
+                                        <div style="height: 8px; background: var(--gray-300); border-radius: 4px; overflow: hidden;">
+                                            <div style="height: 100%; width: 30%; background: linear-gradient(90deg, #F44336, #D32F2F);"></div>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between; margin-top: 5px; font-size: 0.9rem; color: var(--gray-600);">
+                                            <span>18% → 12%</span>
+                                            <span>-33% decline</span>
+                                        </div>
+                                    </li>
+                                    <li style="margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--gray-300);">
+                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                                            <span style="font-weight: 600; color: var(--gray-800);">Dunkin</span>
+                                            <span style="font-weight: 700; color: #F44336;">-4pp</span>
+                                        </div>
+                                        <div style="height: 8px; background: var(--gray-300); border-radius: 4px; overflow: hidden;">
+                                            <div style="height: 100%; width: 20%; background: linear-gradient(90deg, #F44336, #D32F2F);"></div>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between; margin-top: 5px; font-size: 0.9rem; color: var(--gray-600);">
+                                            <span>9% → 5%</span>
+                                            <span>-44% decline</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                                            <span style="font-weight: 600; color: var(--gray-800);">Xfinity</span>
+                                            <span style="font-weight: 700; color: #F44336;">-1pp</span>
+                                        </div>
+                                        <div style="height: 8px; background: var(--gray-300); border-radius: 4px; overflow: hidden;">
+                                            <div style="height: 100%; width: 10%; background: linear-gradient(90deg, #F44336, #D32F2F);"></div>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between; margin-top: 5px; font-size: 0.9rem; color: var(--gray-600);">
+                                            <span>1% → 0%</span>
+                                            <span>-100% decline</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Abu Dhabi Competitive Position -->
+                        <div style="background: linear-gradient(135deg, rgba(0,122,51,0.05), rgba(0,0,0,0.1)); border-radius: var(--radius); padding: 25px; border: 1px solid var(--gray-300);">
+                            <h4 style="color: var(--primary); margin-bottom: 20px; font-size: 1.1rem; text-align: center;">Abu Dhabi's Competitive Position (Wave 2 → Wave 3)</h4>
+                            
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 30px;">
+                                <div style="text-align: center; flex: 1;">
+                                    <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary); margin-bottom: 5px;">2nd</div>
+                                    <div style="font-size: 0.9rem; color: var(--gray-600);">Overall Rank</div>
+                                </div>
+                                <div style="text-align: center; flex: 1;">
+                                    <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary); margin-bottom: 5px;">2nd</div>
+                                    <div style="font-size: 0.9rem; color: var(--gray-600);">Relative Growth Rank</div>
+                                </div>
+                                <div style="text-align: center; flex: 1;">
+                                    <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary); margin-bottom: 5px;">250%</div>
+                                    <div style="font-size: 0.9rem; color: var(--gray-600);">Relative Growth</div>
+                                </div>
+                            </div>
+                            
+                            <p style="color: var(--gray-800); background: rgba(0,122,51,0.1); padding: 15px; border-radius: var(--radius); font-weight: 500; margin-bottom: 0;">
+                                Between May 2024 and March 2025, Abu Dhabi achieved the <strong style="color: var(--primary);">highest percentage point growth</strong> (+15pp) among all Boston Celtics sponsors, outpacing even TD Bank (+16pp) in relative terms with a <strong style="color: var(--primary);">250% growth rate</strong>. This exceptional performance in the most recent period demonstrates the accelerating momentum of the sponsorship as it matures in the market.
+                            </p>
+                            <p style="color: var(--gray-600); font-size: 0.8rem; margin-top: 10px; font-style: italic; text-align: right;">
+                                Full journey context: 1% → 6% → 21% (+2000% overall growth since baseline)
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Strategic Insights -->
+                    <div class="strategy-summary" style="background-color: #103821; border-left: 4px solid #BA9653; padding: 24px 28px; margin-bottom: 30px; border-radius: 0 var(--radius) var(--radius) 0; box-shadow: var(--shadow-md);">
+                        <h3 style="color: #FFFFFF; margin-bottom: 15px; font-size: 1.3rem;"><i class="fas fa-lightbulb" style="color: #BA9653;"></i> Sponsorship Landscape Insights</h3>
+                        <p style="margin-bottom: 15px; color: #FFFFFF;"><strong style="color: #00A94F; font-size: 1.05rem;">Competitive Positioning:</strong> Among a field of 23 sponsors, Abu Dhabi has successfully positioned itself as a Tier 1 sponsor with 21% awareness, achieving the second-highest recognition level overall. This places the destination in an elite category alongside TD Bank (34%), significantly outperforming established brands like Nike (9%) and Gatorade (6%).</p>
+                        <p style="margin-bottom: 15px; color: #FFFFFF;"><strong style="color: #00A94F; font-size: 1.05rem;">Growth Leadership:</strong> With a 2000% relative growth from baseline (1% → 21%), Abu Dhabi demonstrates the highest growth trajectory among all 23 sponsors. This exceptional performance highlights the effectiveness of the sponsorship activation strategy in rapidly building brand recognition from a minimal baseline.</p>
+                        <p style="margin-bottom: 15px; color: #FFFFFF;"><strong style="color: #00A94F; font-size: 1.05rem;">Category Disruption:</strong> As a destination sponsor, Abu Dhabi has successfully disrupted the traditional sponsorship landscape dominated by financial services, apparel, and beverage brands. This differentiation likely contributes to its memorability and breakthrough performance.</p>
+                        <p style="margin-bottom: 0; color: #FFFFFF;"><strong style="color: #00A94F; font-size: 1.05rem;">Competitive Dynamics:</strong> The sponsorship landscape shows significant volatility, with several established sponsors showing declining awareness (Vistaprint -29%, Dunkin -44%). This creates an opportunity for Abu Dhabi to further consolidate its position as a leading sponsor through continued activation and engagement strategies.</p>
+                    </div>
+                </section>
+                
+                <!-- Destination Awareness Section -->
+                <section id="destination-awareness" class="section">
+                    <div class="section-header">
+                        <h2 class="section-title"><i class="fas fa-globe"></i> Impact on Destination Awareness</h2>
+                    </div>
+                    
+                    <div class="insight-summary">
+                        <h3><i class="fas fa-lightbulb"></i> Key Destination Awareness Insights</h3>
+                        <p>The Boston Celtics sponsorship has created a dual impact on Abu Dhabi's destination awareness: significantly increasing awareness among fans (from 32% to 59%) while simultaneously lifting general population awareness from 18% to 27%. Starting from a pre-launch baseline in December 2023, awareness has grown consistently through each measurement wave across both audiences. This demonstrates how targeted sports sponsorships can create both focused impact among fans and broader market penetration, effectively positioning Abu Dhabi as a premier travel destination.</p>
+                    </div>
+                    
+                    <!-- Impact Metrics Grid -->
+                    <div class="grid-2" style="grid-template-columns: repeat(2, 1fr);">
+                        <div class="data-card">
+                            <div class="card-header">
+                                <div class="metric-name">
+                                    <i class="fas fa-rocket"></i> Total Fan Awareness Growth
+                                </div>
+                                <button class="expand-toggle" aria-label="Show details">
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                            </div>
+                            <div class="metric-value">+27pp</div>
+                            <div style="text-align: center; font-size: 0.9rem; color: var(--gray-700); margin: -5px 0 15px;">
+                                <span style="color: var(--primary-dark);">32% → 59%</span>
+                            </div>
+                            <div class="card-details">
+                                <div class="details-title">About This Metric</div>
+                                <p>This metric represents the total percentage point growth in destination awareness among Boston Celtics fans from pre-launch (Dec 2023) to the latest measurement (Mar 2025).</p>
+                                <p>The 27 percentage point increase demonstrates the significant impact of the sponsorship in building destination awareness over the entire measurement period.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="data-card">
+                            <div class="card-header">
+                                <div class="metric-name">
+                                    <i class="fas fa-users"></i> General Population Growth
+                                </div>
+                                <button class="expand-toggle" aria-label="Show details">
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                            </div>
+                            <div class="metric-value" style="color: #BA9653; text-shadow: 0 0 10px rgba(186,150,83,0.2);">+9pp</div>
+                            <div style="text-align: center; font-size: 0.9rem; color: var(--gray-700); margin: -5px 0 15px;">
+                                <span style="color: #BA9653;">18% → 27%</span>
+                            </div>
+                            <div class="card-details">
+                                <div class="details-title" style="color: #BA9653;">About This Metric</div>
+                                <p>This metric shows the total percentage point growth in destination awareness among the general population from pre-launch (Dec 2023) to the latest measurement (Mar 2025).</p>
+                                <p>The 9 percentage point increase (50% relative growth) demonstrates the sponsorship's broader market impact beyond the core fan audience, creating significant spillover awareness in the general population.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="data-card">
+                            <div class="card-header">
+                                <div class="metric-name">
+                                    <i class="fas fa-chart-line"></i> Awareness Acceleration
+                                </div>
+                                <button class="expand-toggle" aria-label="Show details">
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                            </div>
+                            <div class="metric-value">1.5pp</div>
+                            <div style="text-align: center; font-size: 0.9rem; color: var(--gray-700); margin: -5px 0 15px;">
+                                <span style="color: var(--primary-dark);">per month</span>
+                            </div>
+                            <div class="card-details">
+                                <div class="details-title">About This Metric</div>
+                                <p>This metric shows the monthly growth rate in the latest period (May 2024 to Mar 2025), indicating the pace at which destination awareness is increasing among fans.</p>
+                                <p>While slightly lower than the initial growth rate (2.4pp/month), the sustained 1.5pp monthly growth demonstrates continued momentum even after the initial launch period.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="data-card">
+                            <div class="card-header">
+                                <div class="metric-name">
+                                    <i class="fas fa-bullseye"></i> Fan vs. General Population Gap
+                                </div>
+                                <button class="expand-toggle" aria-label="Show details">
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                            </div>
+                            <div class="metric-value">+32pp</div>
+                            <div style="text-align: center; font-size: 0.9rem; color: var(--gray-700); margin: -5px 0 15px;">
+                                <span style="color: var(--primary-dark);">+14pp → +32pp</span>
+                            </div>
+                            <div class="card-details">
+                                <div class="details-title">About This Metric</div>
+                                <p>This metric shows the awareness advantage among Celtics fans compared to the general population, highlighting the targeted impact of the sponsorship.</p>
+                                <p>The gap has more than doubled from +14pp pre-launch to +32pp in the latest wave, demonstrating the sponsorship's effectiveness in creating a significant awareness differential among the target audience.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Enhanced Timeline Visualization Card -->
+                    <div style="background: var(--card-bg); border-radius: var(--radius-md); padding: 30px; margin-top: 40px; margin-bottom: 30px; border: 1px solid var(--gray-300); box-shadow: var(--shadow-md); position: relative; overflow: hidden;">
+                        
+                        <h3 style="color: var(--gray-800); margin-bottom: 20px; font-size: 1.3rem; display: flex; align-items: center; position: relative; z-index: 2;">
+                            <i class="fas fa-globe" style="color: var(--primary); margin-right: 12px; font-size: 1.1em;"></i> Destination Awareness Evolution
+                        </h3>
+                        
+                        <!-- Timeline Legend - Moved directly below title -->
+                        <div style="display: flex; justify-content: center; margin-bottom: 20px; z-index: 5;">
+                            <div style="display: flex; gap: 30px; background-color: rgba(0,0,0,0.2); padding: 8px 15px; border-radius: 8px;">
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <div style="width: 12px; height: 12px; background: linear-gradient(135deg, #007A33, #00A94F); border-radius: 50%;"></div>
+                                    <span style="color: var(--gray-800); font-size: 0.9rem; font-weight: 500;">Celtics Fans</span>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <div style="width: 12px; height: 12px; background: #BA9653; border-radius: 50%;"></div>
+                                    <span style="color: var(--gray-800); font-size: 0.9rem; font-weight: 500;">General Population</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Timeline Visualization -->
+                        <div style="position: relative; height: 280px; margin: 30px 0; z-index: 2; padding: 0 5%;">
+                            <!-- Timeline Labels -->
+                            <div style="position: absolute; top: 0; left: 10%; text-align: center; width: 120px; transform: translateX(-50%);">
+                                <div style="font-weight: 700; font-size: 1rem; color: var(--gray-800); margin-bottom: 4px;">Dec 2023</div>
+                                <div style="font-size: 0.85rem; color: var(--gray-600); background-color: rgba(0,0,0,0.1); padding: 2px 8px; border-radius: 10px; display: inline-block;">Pre-Launch</div>
+                            </div>
+                            
+                            <div style="position: absolute; top: 0; left: 45%; text-align: center; width: 120px; transform: translateX(-50%);">
+                                <div style="font-weight: 700; font-size: 1rem; color: var(--gray-800); margin-bottom: 4px;">May 2024</div>
+                                <div style="font-size: 0.85rem; color: var(--gray-600); background-color: rgba(0,0,0,0.1); padding: 2px 8px; border-radius: 10px; display: inline-block;">Mid-point</div>
+                            </div>
+                            
+                            <div style="position: absolute; top: 0; left: 90%; text-align: center; width: 120px; transform: translateX(-50%);">
+                                <div style="font-weight: 700; font-size: 1rem; color: var(--gray-800); margin-bottom: 4px;">Mar 2025</div>
+                                <div style="font-size: 0.85rem; color: var(--gray-600); background-color: rgba(0,0,0,0.1); padding: 2px 8px; border-radius: 10px; display: inline-block;">Latest Wave</div>
+                            </div>
+                            
+                            <!-- Timeline Lines -->
+                            <!-- Celtics Fans Line -->
+                            <div style="position: absolute; top: 100px; left: 0; right: 0; height: 6px; background: linear-gradient(90deg, rgba(0,122,51,0.3), rgba(0,169,79,0.8)); border-radius: 3px; box-shadow: 0 2px 8px rgba(0,122,51,0.2);"></div>
+                            
+                            <!-- General Population Line -->
+                            <div style="position: absolute; top: 160px; left: 0; right: 0; height: 6px; background: linear-gradient(90deg, rgba(186,150,83,0.3), rgba(186,150,83,0.8)); border-radius: 3px; box-shadow: 0 2px 8px rgba(186,150,83,0.2);"></div>
+                            
+                            <!-- Timeline Points - Celtics Fans -->
+                            <div style="position: absolute; top: 88px; left: 10%; width: 30px; height: 30px; background: linear-gradient(135deg, #007A33, #00A94F); border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 3; box-shadow: 0 2px 4px rgba(0,0,0,0.2); transform: translateX(-50%);">
+                                <span style="color: white; font-size: 0.8rem; font-weight: bold;">32%</span>
+                            </div>
+                            
+                            <div style="position: absolute; top: 88px; left: 45%; width: 30px; height: 30px; background: linear-gradient(135deg, #007A33, #00A94F); border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 3; box-shadow: 0 2px 4px rgba(0,0,0,0.2); transform: translateX(-50%);">
+                                <span style="color: white; font-size: 0.8rem; font-weight: bold;">44%</span>
+                            </div>
+                            
+                            <div style="position: absolute; top: 88px; left: 90%; width: 30px; height: 30px; background: linear-gradient(135deg, #007A33, #00A94F); border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 3; box-shadow: 0 2px 4px rgba(0,0,0,0.2); transform: translateX(-50%);">
+                                <span style="color: white; font-size: 0.8rem; font-weight: bold;">59%</span>
+                            </div>
+                            
+                            <!-- Timeline Points - General Population -->
+                            <div style="position: absolute; top: 148px; left: 10%; width: 30px; height: 30px; background: #BA9653; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 3; box-shadow: 0 2px 4px rgba(0,0,0,0.2); transform: translateX(-50%);">
+                                <span style="color: white; font-size: 0.8rem; font-weight: bold;">18%</span>
+                            </div>
+                            
+                            <div style="position: absolute; top: 148px; left: 45%; width: 30px; height: 30px; background: #BA9653; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 3; box-shadow: 0 2px 4px rgba(0,0,0,0.2); transform: translateX(-50%);">
+                                <span style="color: white; font-size: 0.8rem; font-weight: bold;">22%</span>
+                            </div>
+                            
+                            <div style="position: absolute; top: 148px; left: 90%; width: 30px; height: 30px; background: #BA9653; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 3; box-shadow: 0 2px 4px rgba(0,0,0,0.2); transform: translateX(-50%);">
+                                <span style="color: white; font-size: 0.8rem; font-weight: bold;">27%</span>
+                            </div>
+                            
+                            <!-- Growth Indicators - Celtics Fans -->
+                            <div style="position: absolute; top: 40px; left: 27.5%; text-align: center; width: 120px; background-color: rgba(0,122,51,0.1); padding: 8px 12px; border-radius: 12px; border-left: 3px solid var(--primary); transform: translateX(-50%); box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+                                <div style="font-weight: 700; font-size: 1.1rem; color: var(--primary-dark);">+12pp</div>
+                                <div style="font-size: 0.85rem; color: var(--gray-700);">2.4pp/month</div>
+                            </div>
+                            
+                            <div style="position: absolute; top: 40px; left: 67.5%; text-align: center; width: 120px; background-color: rgba(0,122,51,0.15); padding: 8px 12px; border-radius: 12px; border-left: 3px solid var(--primary); transform: translateX(-50%); box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+                                <div style="font-weight: 700; font-size: 1.1rem; color: var(--primary-dark);">+15pp</div>
+                                <div style="font-size: 0.85rem; color: var(--gray-700);">1.5pp/month</div>
+                            </div>
+                            
+                            <!-- Growth Indicators - General Population -->
+                            <div style="position: absolute; top: 190px; left: 27.5%; text-align: center; width: 120px; background-color: rgba(186,150,83,0.1); padding: 8px 12px; border-radius: 12px; border-left: 3px solid #BA9653; transform: translateX(-50%); box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+                                <div style="font-weight: 700; font-size: 1.1rem; color: #BA9653;">+4pp</div>
+                                <div style="font-size: 0.85rem; color: var(--gray-700);">0.8pp/month</div>
+                            </div>
+                            
+                            <div style="position: absolute; top: 190px; left: 67.5%; text-align: center; width: 120px; background-color: rgba(186,150,83,0.15); padding: 8px 12px; border-radius: 12px; border-left: 3px solid #BA9653; transform: translateX(-50%); box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+                                <div style="font-weight: 700; font-size: 1.1rem; color: #BA9653;">+5pp</div>
+                                <div style="font-size: 0.85rem; color: var(--gray-700);">0.5pp/month</div>
+                            </div>
+                            
+                            <!-- Awareness Gap Indicators -->
+                            <div style="position: absolute; top: 120px; left: 10%; height: 28px; width: 2px; background-color: rgba(255,255,255,0.3); z-index: 2;"></div>
+                            <div style="position: absolute; top: 120px; left: 45%; height: 28px; width: 2px; background-color: rgba(255,255,255,0.3); z-index: 2;"></div>
+                            <div style="position: absolute; top: 120px; left: 90%; height: 28px; width: 2px; background-color: rgba(255,255,255,0.3); z-index: 2;"></div>
+                            
+                            <div style="position: absolute; top: 125px; left: 10%; text-align: center; width: 60px; transform: translateX(-50%); font-size: 0.8rem; color: var(--gray-600);">
+                                +14pp gap
+                            </div>
+                            <div style="position: absolute; top: 125px; left: 45%; text-align: center; width: 60px; transform: translateX(-50%); font-size: 0.8rem; color: var(--gray-600);">
+                                +22pp gap
+                            </div>
+                            <div style="position: absolute; top: 125px; left: 90%; text-align: center; width: 60px; transform: translateX(-50%); font-size: 0.8rem; color: var(--gray-600);">
+                                +32pp gap
+                            </div>
+                        </div>
+                        
+                        <!-- Key Insight Summary -->
+                        <div style="background-color: rgba(0,122,51,0.1); padding: 15px; border-radius: 8px; margin-top: 10px; position: relative; z-index: 2; border-left: 3px solid var(--primary);">
+                            <p style="color: var(--gray-800); font-size: 1rem; margin-bottom: 10px; font-weight: 500;">
+                                <i class="fas fa-lightbulb" style="color: var(--primary); margin-right: 8px;"></i>
+                                The timeline reveals <strong style="color: var(--primary); font-size: 1.1em;">accelerating momentum</strong> in both audience segments, with the fan awareness gap widening from +14pp to +32pp over the measurement period.
+                            </p>
+                            <p style="color: var(--gray-800); font-size: 1rem; margin: 0; font-weight: 500;">
+                                Most notably, the <strong style="color: var(--primary); font-size: 1.1em;">monthly growth rates</strong> show sustained impact: fans (2.4pp → 1.5pp monthly) and general population (0.8pp → 0.5pp monthly), indicating effective long-term brand integration.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Strategic Impact Summary -->
+                    <div class="strategy-summary" style="background-color: #103821; border-left: 4px solid #BA9653; padding: 24px 28px; margin: 30px 0; border-radius: 0 var(--radius) var(--radius) 0; box-shadow: var(--shadow-md);">
+                        <h3 style="color: #FFFFFF; margin-bottom: 15px; font-size: 1.3rem;"><i class="fas fa-globe" style="color: #BA9653;"></i> Destination Awareness Impact Story</h3>
+                        <p style="margin-bottom: 15px; color: #FFFFFF; line-height: 1.6;">The Boston Celtics sponsorship has created a powerful dual impact on Abu Dhabi's presence in the New England market: a <strong style="color: #00A94F;">remarkable 27 percentage point increase</strong> in destination awareness among fans (84% relative growth) alongside a <strong style="color: #BA9653;">significant 9 percentage point lift</strong> in general population awareness (50% relative growth).</p>
+                        <p style="margin-bottom: 15px; color: #FFFFFF; line-height: 1.6;">While the sponsorship created a <strong style="color: #00A94F;">widening awareness gap</strong> between fans and the general population (expanding from 14pp to 32pp), the general population growth demonstrates how sports partnerships can efficiently target core audiences while simultaneously building broader market presence.</p>
+                        <p style="color: #FFFFFF; line-height: 1.6;">The consistent growth across both audience segments indicates that the sponsorship continues to build momentum, with each activation wave further cementing Abu Dhabi in the minds of both Celtics fans and the broader New England population as a premier travel destination.</p>
+                    </div>
+                </section>
+                
+                <!-- Fan Engagement Section -->
+                <section id="fan-engagement" class="section">
+                    <div class="section-header">
+                        <h2 class="section-title"><i class="fas fa-handshake"></i> Fan Engagement</h2>
+                    </div>
+                    
+                    <div class="insight-summary">
+                        <h3><i class="fas fa-lightbulb"></i> Key Fan Engagement Insights</h3>
+                        <p>The Abu Dhabi sponsorship goes significantly beyond creating awareness, driving meaningful engagement through multiple touchpoints that build brand equity while moving fans through the marketing funnel. Each engagement represents a deeper connection with the destination brand, transforming passive awareness into active consideration and intent. The data reveals how these varied touchpoints collectively strengthen Abu Dhabi's position in fans' consideration set for future travel destinations.</p>
+                    </div>
+                    
+                    
+                    <div class="grid-3">
+                        <div class="data-card">
+                            <div class="card-header">
+                                <div class="metric-name">
+                                    <i class="fas fa-search"></i> Google Searches
+                                </div>
+                                <button class="expand-toggle" aria-label="Show details">
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                            </div>
+                            <div class="metric-value">64%</div>
+                            <div class="card-details">
+                                <div class="details-title">About This Metric</div>
+                                <p>64% of aware fans actively searched for Abu Dhabi information, showing strong initial interest.</p>
+                                <p>This represents the first step in the engagement funnel and indicates strong curiosity generated by the sponsorship.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="data-card">
+                            <div class="card-header">
+                                <div class="metric-name">
+                                    <i class="fas fa-hashtag"></i> Social Media Browsing
+                                </div>
+                                <button class="expand-toggle" aria-label="Show details">
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                            </div>
+                            <div class="metric-value">50%</div>
+                            <div class="card-details">
+                                <div class="details-title">About This Metric</div>
+                                <p>50% engaged with Abu Dhabi content on social platforms, showing strong digital engagement.</p>
+                                <p>This includes following Abu Dhabi accounts, liking posts, watching videos, and other social media interactions.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="data-card">
+                            <div class="card-header">
+                                <div class="metric-name">
+                                    <i class="fas fa-globe"></i> Website Visits
+                                </div>
+                                <button class="expand-toggle" aria-label="Show details">
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                            </div>
+                            <div class="metric-value">29%</div>
+                            <div class="card-details">
+                                <div class="details-title">About This Metric</div>
+                                <p>29% visited the Experience Abu Dhabi website, showing deeper engagement and consideration.</p>
+                                <p>This represents a significant conversion from awareness to active research, indicating genuine travel interest.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </section>
+                
+                <!-- Insights & Recommendations Section -->
+                <section id="insights" class="section">
+                    <div class="section-header">
+                        <h2 class="section-title"><i class="fas fa-lightbulb"></i> Insights & Recommendations</h2>
+                    </div>
+                    
+                    <div class="insight-summary">
+                        <h3><i class="fas fa-chart-line"></i> Accelerating Growth Momentum</h3>
+                        <p>The sponsorship shows a remarkable acceleration pattern, with growth rate more than doubling from 0.7pp/month to 1.5pp/month in the most recent period. This indicates we're at an inflection point where the investment is yielding increasingly stronger returns rather than diminishing ones. With a staggering 2000% overall growth from baseline (1% → 21%), Abu Dhabi has achieved the highest growth trajectory among all 23 Celtics sponsors.</p>
+                    </div>
+                    
+                    <div class="insight-summary">
+                        <h3><i class="fas fa-trophy"></i> Category Disruption & Competitive Advantage</h3>
+                        <p>As a destination sponsor in a field dominated by financial services, apparel, and beverage brands, Abu Dhabi has achieved distinctive positioning. This differentiation has helped propel Abu Dhabi to Tier 1 status (21% awareness) alongside only TD Bank (34%), outperforming established brands like Nike (9%) and Gatorade (6%). With several established sponsors showing declining awareness (Vistaprint -33%, Dunkin -44%), there's a strategic opportunity to further consolidate Abu Dhabi's elite position.</p>
+                    </div>
+                    
+                    <div class="insight-summary">
+                        <h3><i class="fas fa-funnel-dollar"></i> Engagement-to-Conversion Pipeline</h3>
+                        <p>The sponsorship has built a robust marketing funnel with 64% of aware fans actively searching for information (consideration), 50% engaging on social media (engagement), and 29% visiting the Experience Abu Dhabi website (intent). This represents a significant opportunity to convert interest into actual travel bookings. The 15% of fans expressing overseas travel interest correlates strongly with in-stadium attendance (55%), providing a clear target audience for conversion efforts.</p>
+                    </div>
+                    
+                    <div class="insight-summary">
+                        <h3><i class="fas fa-bullseye"></i> Dual-Audience Impact</h3>
+                        <p>While creating powerful targeted impact among fans (59% awareness, +27pp growth), the sponsorship simultaneously delivers significant spillover to the general population (27% awareness, +9pp growth). The gap between fan and general population awareness has widened from +14pp to +32pp, demonstrating both the sponsorship's targeted effectiveness and its broader market penetration capabilities.</p>
+                    </div>
+                    
+                    <div class="strategy-summary" style="background-color: #103821; border-left: 4px solid #BA9653; padding: 24px 28px; margin-bottom: 30px; border-radius: 0 var(--radius) var(--radius) 0; box-shadow: var(--shadow-md); background-image: linear-gradient(135deg, #103821, #0A2718);">
+                        <h3 style="color: #FFFFFF; margin-bottom: 15px; font-size: 1.3rem;"><i class="fas fa-lightbulb" style="color: #BA9653;"></i> Strategic Recommendations</h3>
+                        <p style="margin-bottom: 15px; color: #FFFFFF;"><strong style="color: #00A94F; font-size: 1.05rem;">Funnel Optimization Strategy:</strong> Develop a coordinated cross-channel strategy that addresses each stage of the marketing funnel: create targeted content addressing specific questions fans are searching for (consideration stage), develop interactive social media campaigns featuring Celtics players experiencing Abu Dhabi (engagement stage), and implement website conversion optimization with Celtics-themed travel packages (intent stage).</p>
+                        <p style="margin-bottom: 15px; color: #FFFFFF;"><strong style="color: #00A94F; font-size: 1.05rem;">Experiential Marketing Innovation:</strong> Capitalize on the correlation between in-stadium attendance (55%) and travel interest (15%) by creating immersive in-stadium experiences that transport fans to Abu Dhabi virtually. Implement AR/VR installations showcasing Abu Dhabi's attractions during home games to drive deeper engagement and travel consideration.</p>
+                        <p style="margin-bottom: 15px; color: #FFFFFF;"><strong style="color: #BA9653; font-size: 1.05rem;">Competitive Opportunity Exploitation:</strong> With several established sponsors showing declining awareness, there's an opportunity to further consolidate Abu Dhabi's position through increased share of voice and strategic placement during broadcasts and in-stadium. Leverage the volatility in the sponsorship landscape to negotiate enhanced visibility and exclusive activations.</p>
+                        <p style="margin-bottom: 0; color: #FFFFFF;"><strong style="color: #00A94F; font-size: 1.05rem;">Cross-Market Amplification:</strong> Leverage the significant general population awareness growth by developing content that appeals to both dedicated fans and the broader New England market. Create campaigns that highlight the connection between Boston's rich history and Abu Dhabi's blend of tradition and innovation, maximizing the sponsorship's total market impact while maintaining the authentic Celtics connection.</p>
+                    </div>
+                </section>
+                
+                <!-- Back to Top Button -->
+                <button class="back-to-top" id="backToTop" title="Back to Top">
+                    <i class="fas fa-arrow-up"></i>
+                </button>
+            </div>
+            
+            <!-- Footer -->
+            <div class="footer">
+                <p>© 2025 Research &amp; Insights Unit | Strategic Marketing &amp; Communications | Department of Culture and Tourism – Abu Dhabi</p>
+            </div>
+        </main>
+    </div>
+    
+    <script>
+        // Active navigation link highlighting
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Back to top button functionality
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'flex';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Mobile navigation toggle
+        const mobileToggle = document.getElementById('mobileToggle');
+        const sidebar = document.querySelector('.sidebar');
+        
+        mobileToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+        });
+        
+        // Close sidebar when clicking on a link (mobile)
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('active');
+                }
+            });
+        });
+        
+        // Check if mobile view on load
+        window.addEventListener('load', () => {
+            if (window.innerWidth <= 768) {
+                mobileToggle.style.display = 'flex';
+            }
+        });
+        
+        // Check if mobile view on resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth <= 768) {
+                mobileToggle.style.display = 'flex';
+            } else {
+                mobileToggle.style.display = 'none';
+                sidebar.classList.remove('active');
+            }
+        });
+        
+        // Data card expansion functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all expand toggle buttons
+            const expandButtons = document.querySelectorAll('.expand-toggle');
+            
+            // Add click event to each expand button
+            expandButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Toggle the expanded class on the button
+                    this.classList.toggle('expanded');
+                    
+                    // Get the parent data card
+                    const dataCard = this.closest('.data-card');
+                    
+                    // Get the details section
+                    const details = dataCard.querySelector('.card-details');
+                    
+                    // Toggle the expanded class on the details section
+                    details.classList.toggle('expanded');
+                    
+                    // Update the aria-expanded attribute for accessibility
+                    const isExpanded = details.classList.contains('expanded');
+                    this.setAttribute('aria-expanded', isExpanded);
+                    
+                    // Update the aria-label for accessibility
+                    this.setAttribute('aria-label', isExpanded ? 'Hide details' : 'Show details');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
