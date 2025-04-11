@@ -19,25 +19,97 @@
         @keyframes sonerScan { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         @keyframes sonerBlip { 0%, 20%, 100% { opacity: 0; } 2%, 15% { opacity: 1; } 3% { transform: scale(1.2); } }
         
-        /* SONER Logo styles */
-        .soner-logo { display: flex; align-items: center; color: white; font-family: 'Inter', sans-serif; font-size: 28px; font-weight: 300; }
-        .soner-radar { width: 24px; height: 24px; border-radius: 50%; border: 1px solid white; margin: 0 3px; position: relative; background-color: rgba(255, 255, 255, 0.05); overflow: hidden; }
-        .soner-scanner { position: absolute; top: 0; left: 0; width: 100%; height: 100%; animation: sonerScan 4s linear infinite; transform-origin: center; }
-        .soner-scanner::before { content: ''; position: absolute; top: 0; left: 50%; width: 50%; height: 50%; background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.4)); transform-origin: bottom left; clip-path: polygon(0 0, 100% 0, 0 100%); }
-        .soner-scanner::after { content: ''; position: absolute; top: 0; left: 50%; width: 50%; height: 1px; background: linear-gradient(90deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 1)); transform-origin: left center; box-shadow: 0 0 4px rgba(255, 255, 255, 0.8); }
-        .soner-blip { position: absolute; width: 2px; height: 2px; background-color: white; border-radius: 50%; opacity: 0; box-shadow: 0 0 4px white; }
-        .soner-blip:nth-child(1) { top: 25%; left: 30%; animation: sonerBlip 4s 1s infinite; }
-        .soner-blip:nth-child(2) { top: 65%; left: 60%; animation: sonerBlip 4s 2.5s infinite; }
-        .soner-tagline { color: white; font-size: 8px; text-transform: uppercase; font-weight: 500; letter-spacing: 0.5em; margin-left: 10px; opacity: 0.8; }
+        /* SONER Logo styles - Mobile-first approach */
+        .soner-logo { 
+            display: flex; 
+            align-items: center; 
+            color: white; 
+            font-family: 'Inter', sans-serif; 
+            font-size: 20px; 
+            font-weight: 300; 
+        }
+        .soner-radar { 
+            width: 18px; 
+            height: 18px; 
+            border-radius: 50%; 
+            border: 1px solid white; 
+            margin: 0 3px; 
+            position: relative; 
+            background-color: rgba(255, 255, 255, 0.05); 
+            overflow: hidden; 
+        }
+        .soner-scanner { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            animation: sonerScan 4s linear infinite; 
+            transform-origin: center; 
+        }
+        .soner-scanner::before { 
+            content: ''; 
+            position: absolute; 
+            top: 0; 
+            left: 50%; 
+            width: 50%; 
+            height: 50%; 
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.4)); 
+            transform-origin: bottom left; 
+            clip-path: polygon(0 0, 100% 0, 0 100%); 
+        }
+        .soner-scanner::after { 
+            content: ''; 
+            position: absolute; 
+            top: 0; 
+            left: 50%; 
+            width: 50%; 
+            height: 1px; 
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 1)); 
+            transform-origin: left center; 
+            box-shadow: 0 0 4px rgba(255, 255, 255, 0.8); 
+        }
+        .soner-blip { 
+            position: absolute; 
+            width: 2px; 
+            height: 2px; 
+            background-color: white; 
+            border-radius: 50%; 
+            opacity: 0; 
+            box-shadow: 0 0 4px white; 
+        }
+        .soner-blip:nth-child(1) { 
+            top: 25%; 
+            left: 30%; 
+            animation: sonerBlip 4s 1s infinite; 
+        }
+        .soner-blip:nth-child(2) { 
+            top: 65%; 
+            left: 60%; 
+            animation: sonerBlip 4s 2.5s infinite; 
+        }
+        .soner-tagline { 
+            color: white; 
+            font-size: 6px; 
+            text-transform: uppercase; 
+            font-weight: 500; 
+            letter-spacing: 0.2em; 
+            margin-left: 6px; 
+            opacity: 0.8; 
+        }
         
         :root {
-            --primary: #007A33; /* Celtics green */
-            --primary-light: #103821; /* Dark green for backgrounds */
-            --primary-dark: #00A94F; /* Light green for text */
-            --secondary: #FFFFFF; /* Celtics white */
-            --secondary-light: #1A1A1A; /* Dark white/gray for backgrounds */
+            --primary: #4285f4; /* Google blue */
+            --primary-light: #1a2233; /* Dark blue for backgrounds */
+            --primary-dark: #8ab4f8; /* Light blue for text */
+            --secondary: #34a853; /* Green */
+            --secondary-light: #1a2a1e; /* Dark green for backgrounds */
             --secondary-dark: #FFFFFF; /* White for text */
-            --accent: #BA9653; /* Celtics gold accent */
+            --accent: #fbbc04; /* Yellow accent (was gold) */
+            --warning: #fbbc04; /* Yellow */
+            --warning-light: #332a1a; /* Dark yellow for backgrounds */
+            --danger: #ea4335; /* Red */
+            --danger-light: #331f1e; /* Dark red for backgrounds */
             --gray-100: #1e1e1e;
             --gray-200: #2d2d2d;
             --gray-300: #3d3d3d;
@@ -56,6 +128,7 @@
             --card-bg: #121212;
             --section-bg: #181818;
             --sidebar-width: 280px;
+            --content-padding: 15px;
         }
         
         * {
@@ -70,6 +143,7 @@
             color: var(--gray-800);
             line-height: 1.6;
             scroll-behavior: smooth;
+            font-size: 14px;
         }
         
         h1, h2, h3, h4, h5, h6 {
@@ -87,58 +161,73 @@
             color: var(--primary-dark);
         }
         
-        /* Layout */
+        /* Layout - Mobile First */
         .app-container {
             display: flex;
+            flex-direction: column;
             min-height: 100vh;
+            position: relative;
         }
         
         .sidebar {
-            width: var(--sidebar-width);
+            width: 100%;
             background-color: var(--gray-100);
             border-right: 1px solid var(--gray-300);
             position: fixed;
             height: 100vh;
             overflow-y: auto;
             z-index: 100;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .sidebar.active {
+            transform: translateX(0);
         }
         
         .main-content {
             flex: 1;
-            margin-left: var(--sidebar-width);
+            margin-left: 0;
             min-height: 100vh;
+            width: 100%;
         }
         
         .content-wrapper {
-            padding: 30px;
-            max-width: 1280px;
+            padding: var(--content-padding);
+            max-width: 100%;
             margin: 0 auto;
         }
         
-        /* Header */
+        /* Header - Mobile First */
         .header {
-            background: linear-gradient(135deg, var(--primary), #004C1F);
+            background: linear-gradient(135deg, #1a73e8, #174ea6);
             color: white;
-            padding: 32px 0;
+            padding: 20px 0;
             text-align: center;
             position: relative;
             overflow: hidden;
         }
         
         .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 8px;
+            font-size: 1.8rem;
+            margin-bottom: 6px;
+        }
+        
+        .header h2 {
+            font-size: 1rem;
+            margin-top: 5px;
+            font-weight: 500;
         }
         
         .header p {
-            font-size: 1.1rem;
-            max-width: 600px;
+            font-size: 0.9rem;
+            max-width: 100%;
             margin: 0 auto;
         }
         
-        /* Sidebar Navigation */
+        /* Sidebar Navigation - Mobile First */
         .sidebar-header {
-            padding: 20px;
+            padding: 15px;
             border-bottom: 1px solid var(--gray-300);
             display: flex;
             align-items: center;
@@ -146,7 +235,7 @@
         }
         
         .sidebar-title {
-            font-size: 1.2rem;
+            font-size: 1rem;
             font-weight: 600;
             color: var(--gray-800);
         }
@@ -160,11 +249,12 @@
         .nav-link {
             display: flex;
             align-items: center;
-            padding: 15px 20px;
+            padding: 12px 15px;
             color: var(--gray-700);
             border-left: 3px solid transparent;
             transition: var(--transition);
             font-weight: 500;
+            font-size: 0.9rem;
         }
         
         .nav-link:hover {
@@ -184,12 +274,32 @@
             text-align: center;
         }
         
-        /* Section Styles */
+        /* Mobile Navigation Toggle */
+        .mobile-toggle {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 101;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-md);
+        }
+        
+        /* Section Styles - Mobile First */
         .section {
             background-color: var(--section-bg);
             border-radius: var(--radius-md);
-            padding: 30px;
-            margin-bottom: 30px;
+            padding: 20px;
+            margin-bottom: 20px;
             border: 1px solid var(--gray-300);
             transition: var(--transition);
         }
@@ -202,13 +312,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             border-bottom: 2px solid var(--gray-200);
-            padding-bottom: 15px;
+            padding-bottom: 12px;
         }
         
         .section-title {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             color: white;
             display: flex;
             align-items: center;
@@ -219,24 +329,18 @@
             color: var(--primary);
         }
         
-        /* Grid Layouts */
-        .grid-2 {
+        /* Grid Layouts - Mobile First */
+        .grid-2, .grid-3 {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
+            grid-template-columns: 1fr;
+            gap: 15px;
         }
         
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-        
-        /* Data Card */
+        /* Data Card - Mobile First */
         .data-card {
             background-color: var(--card-bg);
             border-radius: var(--radius);
-            padding: 24px;
+            padding: 15px;
             box-shadow: var(--shadow-sm);
             border: 1px solid var(--gray-300);
             transition: var(--transition);
@@ -245,6 +349,7 @@
             flex-direction: column;
             position: relative;
             overflow: hidden;
+            margin-bottom: 15px;
         }
         
         .data-card:hover {
@@ -254,12 +359,13 @@
         
         .data-card h4 {
             border-bottom: 1px solid var(--gray-200);
-            padding-bottom: 12px;
-            margin-bottom: 16px;
+            padding-bottom: 10px;
+            margin-bottom: 12px;
             color: var(--gray-800);
             display: flex;
             align-items: center;
-            min-height: 60px; /* Added fixed minimum height to ensure consistent HR line positioning */
+            min-height: auto;
+            font-size: 1rem;
         }
         
         .data-card h4 i {
@@ -278,29 +384,31 @@
         }
         
         .data-card li {
-            margin-bottom: 10px;
-            padding-left: 5px;
-            text-indent: -5px;
+            margin-bottom: 8px;
+            padding-left: 2px;
+            text-indent: -2px;
+            font-size: 0.9rem;
+            line-height: 1.3;
         }
         
         .data-card li:last-child {
             margin-bottom: 0;
         }
         
-        /* Insight Summary */
+        /* Insight Summary - Mobile First */
         .insight-summary {
             background-color: var(--primary-light);
             border-left: 4px solid var(--primary);
-            padding: 20px 24px;
-            margin-bottom: 28px;
+            padding: 15px;
+            margin-bottom: 20px;
             border-radius: 0 var(--radius) var(--radius) 0;
             position: relative;
         }
         
         .insight-summary h3 {
             color: var(--primary-dark);
-            margin-bottom: 12px;
-            font-size: 1.25rem;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
             display: flex;
             align-items: center;
         }
@@ -309,20 +417,25 @@
             margin-right: 10px;
         }
         
-        /* Strategy Summary - Blue styling for strategy sections */
+        .insight-summary p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        /* Strategy Summary - Mobile First */
         .strategy-summary {
-            background-color: var(--secondary-light);
-            border-left: 4px solid var(--secondary);
-            padding: 20px 24px;
-            margin-bottom: 28px;
+            background-color: var(--warning-light);
+            border-left: 4px solid var(--warning);
+            padding: 15px;
+            margin-bottom: 20px;
             border-radius: 0 var(--radius) var(--radius) 0;
             position: relative;
         }
         
         .strategy-summary h3 {
             color: var(--secondary-dark);
-            margin-bottom: 12px;
-            font-size: 1.25rem;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
             display: flex;
             align-items: center;
         }
@@ -331,20 +444,20 @@
             margin-right: 10px;
         }
         
-        /* Executive Summary */
+        /* Executive Summary - Mobile First */
         .executive-summary {
-            background: linear-gradient(135deg, var(--primary-light), var(--secondary-light));
+            background: linear-gradient(135deg, var(--primary-light), var(--warning-light));
             border-radius: var(--radius-md);
-            padding: 30px;
-            margin-bottom: 30px;
+            padding: 20px;
+            margin-bottom: 20px;
             position: relative;
             border: 1px solid var(--gray-300);
         }
         
         .summary-title {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             color: var(--primary);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
         }
@@ -355,15 +468,15 @@
         
         .key-metrics {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-top: 15px;
         }
         
         .key-metric {
             background-color: rgba(0, 0, 0, 0.2);
             border-radius: var(--radius);
-            padding: 15px;
+            padding: 12px;
             text-align: center;
             transition: var(--transition);
         }
@@ -374,12 +487,12 @@
         }
         
         .key-metric-value {
-            font-size: 3rem;
+            font-size: 2rem;
             font-weight: 800;
             color: var(--primary);
-            margin: 15px 0;
+            margin: 10px 0;
             text-align: center;
-            text-shadow: 0 0 10px rgba(0, 122, 51, 0.3);
+            text-shadow: 0 0 10px rgba(66, 133, 244, 0.3);
             letter-spacing: -0.5px;
             line-height: 1.1;
             transition: var(--transition);
@@ -390,75 +503,76 @@
         }
         
         .key-metric-label {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--gray-700);
             font-weight: 500;
         }
         
-        /* Change indicator styles */
+        /* Change indicator styles - Mobile First */
         .change {
             display: flex;
             align-items: center;
-            padding: 4px 10px;
+            padding: 3px 8px;
             border-radius: 20px;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             font-weight: 600;
             transition: var(--transition);
             position: relative;
-            margin: -10px auto 15px;
+            margin: -8px auto 10px;
             justify-content: center;
             width: fit-content;
         }
         
         .change i {
             margin-right: 4px;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
         }
         
         .positive { 
             background-color: var(--secondary-light); 
-            color: var(--secondary-dark);
+            color: var(--secondary);
         }
         
         .negative { 
-            background-color: rgba(244, 67, 54, 0.2); 
-            color: #F44336;
+            background-color: var(--danger-light); 
+            color: var(--danger);
         }
         
-        /* Back to Top Button */
+        /* Back to Top Button - Mobile First */
         .back-to-top {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
+            bottom: 20px;
+            right: 20px;
             background-color: var(--primary);
             color: white;
             border: none;
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 20px;
+            width: 40px;
+            height: 40px;
+            font-size: 16px;
             cursor: pointer;
-            display: flex;
+            display: none;
             align-items: center;
             justify-content: center;
             z-index: 1000;
-            box-shadow: 0 4px 12px rgba(0, 122, 51, 0.4);
+            box-shadow: 0 4px 12px rgba(66, 133, 244, 0.4);
             transition: var(--transition);
         }
         
         .back-to-top:hover {
             background-color: var(--primary-dark);
-            transform: translateY(-4px);
-            box-shadow: 0 6px 16px rgba(0, 122, 51, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(66, 133, 244, 0.5);
         }
         
-        /* Data Card Expansion Styles */
+        /* Data Card Expansion Styles - Mobile First */
         .card-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 8px;
-            min-height: 60px; /* Fixed height for consistent alignment */
+            margin-bottom: 6px;
+            min-height: auto;
+            flex-wrap: wrap;
         }
         
         .metric-name {
@@ -467,6 +581,8 @@
             font-weight: 500;
             color: var(--gray-800);
             flex: 1;
+            font-size: 0.9rem;
+            line-height: 1.3;
         }
         
         .metric-name i {
@@ -482,10 +598,10 @@
             text-align: center;
             margin: 20px auto 15px;
             padding: 10px 15px;
-            background: linear-gradient(135deg, rgba(0, 122, 51, 0.1), rgba(0, 0, 0, 0));
+            background: linear-gradient(135deg, rgba(66, 133, 244, 0.1), rgba(0, 0, 0, 0));
             border-radius: var(--radius);
             border-left: 3px solid var(--primary);
-            text-shadow: 0 0 10px rgba(0, 122, 51, 0.2);
+            text-shadow: 0 0 10px rgba(66, 133, 244, 0.2);
             transition: var(--transition);
             display: block;
             letter-spacing: -0.5px;
@@ -497,7 +613,7 @@
         
         .data-card:hover .metric-value {
             transform: scale(1.05);
-            background: linear-gradient(135deg, rgba(0, 122, 51, 0.15), rgba(0, 0, 0, 0));
+            background: linear-gradient(135deg, rgba(66, 133, 244, 0.15), rgba(0, 0, 0, 0));
         }
         
         .expand-toggle {
@@ -516,13 +632,13 @@
         }
         
         .expand-toggle:hover {
-            background-color: rgba(0, 122, 51, 0.1);
+            background-color: rgba(66, 133, 244, 0.1);
             transform: scale(1.1);
         }
         
         .expand-toggle:focus {
             outline: none;
-            box-shadow: 0 0 0 2px rgba(0, 122, 51, 0.3);
+            box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.3);
         }
         
         .expand-toggle i {
@@ -569,107 +685,258 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
-        /* Responsive Styles */
-        @media (max-width: 768px) {
-            .sidebar {
-                transform: translateX(-100%);
-            }
-            
-            .sidebar.active {
-                transform: translateX(0);
-            }
-            
-            .main-content {
-                margin-left: 0;
-            }
-            
-            .mobile-toggle {
-                display: block !important;
-            }
-            
-            .grid-2, .grid-3 {
-                grid-template-columns: 1fr;
-                gap: 16px;
-            }
-            
-            .tooltip {
-                width: 95%;
-                padding: 20px;
+        /* Responsive Styles - Mobile First Approach */
+        /* Tablet Styles (481px and up) */
+        @media (min-width: 481px) {
+            body {
                 font-size: 15px;
             }
             
-            .tooltip-title {
-                font-size: 16px;
-            }
-            
-            /* Data Card Mobile Optimizations */
-            .data-card {
-                padding: 16px;
-                margin-bottom: 16px;
-            }
-            
-            .data-card ul {
-                padding-left: 0;
-            }
-            
-            .data-card li {
-                padding-left: 3px;
-                text-indent: -3px;
-                font-size: 0.95rem;
-                line-height: 1.4;
-            }
-            
-            .data-card h4 {
-                font-size: 1.05rem;
-                padding-bottom: 10px;
-                margin-bottom: 12px;
-            }
-            
-            .card-header {
-                min-height: auto;
-                margin-bottom: 6px;
-                flex-wrap: wrap;
-            }
-            
-            .metric-name {
-                font-size: 0.9rem;
-                line-height: 1.3;
-            }
-            
-            .metric-value {
+            .header h1 {
                 font-size: 2rem;
-                margin: 12px auto 10px;
-                padding: 8px 10px;
             }
             
-            .change {
-                margin: -8px auto 10px;
-                font-size: 0.8rem;
-                padding: 3px 8px;
+            .header h2 {
+                font-size: 1.2rem;
             }
             
-            .expand-toggle {
-                width: 32px;
-                height: 32px;
+            .header p {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
             }
             
             .content-wrapper {
-                padding: 20px 15px;
+                padding: 20px;
             }
             
             .section {
-                padding: 20px;
-                margin-bottom: 24px;
+                padding: 25px;
+                margin-bottom: 25px;
             }
             
-            .insight-summary {
-                padding: 16px 20px;
+            .grid-2 {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+            
+            .key-metrics {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .key-metric-value {
+                font-size: 2.2rem;
+            }
+            
+            .data-card {
+                padding: 18px;
+            }
+            
+            .data-card h4 {
+                font-size: 1.1rem;
+            }
+            
+            .metric-value {
+                font-size: 2.2rem;
+            }
+            
+            .insight-summary, .strategy-summary {
+                padding: 18px 22px;
+            }
+            
+            .insight-summary h3, .strategy-summary h3 {
+                font-size: 1.2rem;
+            }
+            
+            .soner-logo {
+                font-size: 24px;
+            }
+            
+            .soner-radar {
+                width: 20px;
+                height: 20px;
+            }
+            
+            .soner-tagline {
+                font-size: 7px;
+                letter-spacing: 0.3em;
+            }
+        }
+        
+        /* Desktop Styles (769px and up) */
+        @media (min-width: 769px) {
+            body {
+                font-size: 16px;
+            }
+            
+            .app-container {
+                flex-direction: row;
+            }
+            
+            .sidebar {
+                width: var(--sidebar-width);
+                transform: translateX(0);
+                position: fixed;
+            }
+            
+            .main-content {
+                margin-left: var(--sidebar-width);
+            }
+            
+            .mobile-toggle {
+                display: none !important;
+            }
+            
+            .content-wrapper {
+                padding: 30px;
+                max-width: 1280px;
+            }
+            
+            .header {
+                padding: 32px 0;
+            }
+            
+            .header h1 {
+                font-size: 2.5rem;
+                margin-bottom: 8px;
+            }
+            
+            .header h2 {
+                font-size: 1.3rem;
+            }
+            
+            .header p {
+                font-size: 1.1rem;
+                max-width: 600px;
+            }
+            
+            .section {
+                padding: 30px;
+                margin-bottom: 30px;
+            }
+            
+            .section-header {
                 margin-bottom: 20px;
+                padding-bottom: 15px;
             }
             
-            .insight-summary h3 {
-                font-size: 1.15rem;
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .grid-2 {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+            
+            .grid-3 {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 20px;
+            }
+            
+            .data-card {
+                padding: 24px;
+                margin-bottom: 0;
+            }
+            
+            .data-card h4 {
+                padding-bottom: 12px;
+                margin-bottom: 16px;
+                min-height: 60px;
+                font-size: 1.1rem;
+            }
+            
+            .data-card li {
                 margin-bottom: 10px;
+                padding-left: 5px;
+                text-indent: -5px;
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+            
+            .card-header {
+                margin-bottom: 8px;
+                min-height: 60px;
+            }
+            
+            .metric-name {
+                font-size: 1rem;
+                line-height: 1.5;
+            }
+            
+            .metric-value {
+                font-size: 2.5rem;
+                margin: 20px auto 15px;
+                padding: 10px 15px;
+            }
+            
+            .change {
+                padding: 4px 10px;
+                font-size: 0.9rem;
+                margin: -10px auto 15px;
+            }
+            
+            .key-metrics {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 20px;
+            }
+            
+            .key-metric {
+                padding: 15px;
+            }
+            
+            .key-metric-value {
+                font-size: 3rem;
+                margin: 15px 0;
+            }
+            
+            .key-metric-label {
+                font-size: 0.9rem;
+            }
+            
+            .insight-summary, .strategy-summary {
+                padding: 20px 24px;
+                margin-bottom: 28px;
+            }
+            
+            .insight-summary h3, .strategy-summary h3 {
+                margin-bottom: 12px;
+                font-size: 1.25rem;
+            }
+            
+            .back-to-top {
+                bottom: 30px;
+                right: 30px;
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+            
+            .soner-logo {
+                font-size: 28px;
+            }
+            
+            .soner-radar {
+                width: 24px;
+                height: 24px;
+            }
+            
+            .soner-tagline {
+                font-size: 8px;
+                letter-spacing: 0.5em;
+                margin-left: 10px;
+            }
+            
+            .executive-summary {
+                padding: 30px;
+                margin-bottom: 30px;
+            }
+            
+            .summary-title {
+                font-size: 1.5rem;
+                margin-bottom: 20px;
             }
         }
         
@@ -981,14 +1248,14 @@
                         </div>
                     </div>
                     
-                    <div class="strategy-summary" style="background-color: #103821; border-left: 4px solid #BA9653; padding: 24px 28px; margin-bottom: 30px; border-radius: 0 var(--radius) var(--radius) 0; box-shadow: var(--shadow-md);">
-                        <h3 style="color: #FFFFFF; margin-bottom: 15px; font-size: 1.3rem;"><i class="fas fa-lightbulb" style="color: #BA9653;"></i> Fan Behavior Insights</h3>
+                    <div class="strategy-summary" style="background-color: #1a2233; border-left: 4px solid #fbbc04; padding: 24px 28px; margin-bottom: 30px; border-radius: 0 var(--radius) var(--radius) 0; box-shadow: var(--shadow-md);">
+                        <h3 style="color: #FFFFFF; margin-bottom: 15px; font-size: 1.3rem;"><i class="fas fa-lightbulb" style="color: #fbbc04;"></i> Fan Behavior Insights</h3>
                         <p style="font-weight: 500; margin-bottom: 15px; color: #FFFFFF;"><strong>Four key behavioral patterns emerge from our analysis:</strong></p>
                         <ol style="padding-left: 20px; margin-bottom: 0; color: #FFFFFF;">
-                            <li style="margin-bottom: 12px; padding-left: 5px;"><strong style="color: #00A94F;">Content Consumption Beyond Team Loyalty:</strong> 72% of Celtics fans consume basketball content beyond just Celtics games, with 46% watching multiple teams and 26% watching regardless of teams playing. This indicates fans have broader basketball interests that extend beyond single-team loyalty.</li>
-                            <li style="margin-bottom: 12px; padding-left: 5px;"><strong style="color: #00A94F;">Multi-Context Viewing Habits:</strong> Engagement occurs across diverse contexts, with high-frequency viewers (44% watching 4+ times weekly) distributing their attention across in-stadium experiences (55%), sports bar social viewing (38%), and home viewing (73%).</li>
-                            <li style="margin-bottom: 12px; padding-left: 5px;"><strong style="color: #00A94F;">Travel Interest Correlation:</strong> The 15% of fans expressing overseas travel interest show a significant correlation with in-stadium attendance (55%), suggesting that experiential fans who prioritize live games are more likely to consider destination travel for basketball events.</li>
-                            <li style="margin-bottom: 0; padding-left: 5px;"><strong style="color: #00A94F;">Channel-Specific Engagement Patterns:</strong> Fan awareness is primarily driven through social media (36%), with secondary touchpoints through in-stadium presence (21%), TV advertising (21%), and team merchandise (18%). Player affinity is concentrated around Jayson Tatum (28%) and legacy players like Larry Bird (16%).</li>
+                            <li style="margin-bottom: 12px; padding-left: 5px;"><strong style="color: #8ab4f8;">Content Consumption Beyond Team Loyalty:</strong> 72% of Celtics fans consume basketball content beyond just Celtics games, with 46% watching multiple teams and 26% watching regardless of teams playing. This indicates fans have broader basketball interests that extend beyond single-team loyalty.</li>
+                            <li style="margin-bottom: 12px; padding-left: 5px;"><strong style="color: #8ab4f8;">Multi-Context Viewing Habits:</strong> Engagement occurs across diverse contexts, with high-frequency viewers (44% watching 4+ times weekly) distributing their attention across in-stadium experiences (55%), sports bar social viewing (38%), and home viewing (73%).</li>
+                            <li style="margin-bottom: 12px; padding-left: 5px;"><strong style="color: #8ab4f8;">Travel Interest Correlation:</strong> The 15% of fans expressing overseas travel interest show a significant correlation with in-stadium attendance (55%), suggesting that experiential fans who prioritize live games are more likely to consider destination travel for basketball events.</li>
+                            <li style="margin-bottom: 0; padding-left: 5px;"><strong style="color: #8ab4f8;">Channel-Specific Engagement Patterns:</strong> Fan awareness is primarily driven through social media (36%), with secondary touchpoints through in-stadium presence (21%), TV advertising (21%), and team merchandise (18%). Player affinity is concentrated around Jayson Tatum (28%) and legacy players like Larry Bird (16%).</li>
                         </ol>
                     </div>
                 </section>
@@ -1294,12 +1561,12 @@
                     </div>
                     
                     <!-- Strategic Insights -->
-                    <div class="strategy-summary" style="background-color: #103821; border-left: 4px solid #BA9653; padding: 24px 28px; margin-bottom: 30px; border-radius: 0 var(--radius) var(--radius) 0; box-shadow: var(--shadow-md);">
-                        <h3 style="color: #FFFFFF; margin-bottom: 15px; font-size: 1.3rem;"><i class="fas fa-lightbulb" style="color: #BA9653;"></i> Sponsorship Landscape Insights</h3>
-                        <p style="margin-bottom: 15px; color: #FFFFFF;"><strong style="color: #00A94F; font-size: 1.05rem;">Competitive Positioning:</strong> Among a field of 23 sponsors, Abu Dhabi has successfully positioned itself as a Tier 1 sponsor with 21% awareness, achieving the second-highest recognition level overall. This places the destination in an elite category alongside TD Bank (34%), significantly outperforming established brands like Nike (9%) and Gatorade (6%).</p>
-                        <p style="margin-bottom: 15px; color: #FFFFFF;"><strong style="color: #00A94F; font-size: 1.05rem;">Growth Leadership:</strong> With a 2000% relative growth from baseline (1% → 21%), Abu Dhabi demonstrates the highest growth trajectory among all 23 sponsors. This exceptional performance highlights the effectiveness of the sponsorship activation strategy in rapidly building brand recognition from a minimal baseline.</p>
-                        <p style="margin-bottom: 15px; color: #FFFFFF;"><strong style="color: #00A94F; font-size: 1.05rem;">Category Disruption:</strong> As a destination sponsor, Abu Dhabi has successfully disrupted the traditional sponsorship landscape dominated by financial services, apparel, and beverage brands. This differentiation likely contributes to its memorability and breakthrough performance.</p>
-                        <p style="margin-bottom: 0; color: #FFFFFF;"><strong style="color: #00A94F; font-size: 1.05rem;">Competitive Dynamics:</strong> The sponsorship landscape shows significant volatility, with several established sponsors showing declining awareness (Vistaprint -29%, Dunkin -44%). This creates an opportunity for Abu Dhabi to further consolidate its position as a leading sponsor through continued activation and engagement strategies.</p>
+                    <div class="strategy-summary" style="background-color: #1a2233; border-left: 4px solid #fbbc04; padding: 24px 28px; margin-bottom: 30px; border-radius: 0 var(--radius) var(--radius) 0; box-shadow: var(--shadow-md);">
+                        <h3 style="color: #FFFFFF; margin-bottom: 15px; font-size: 1.3rem;"><i class="fas fa-lightbulb" style="color: #fbbc04;"></i> Sponsorship Landscape Insights</h3>
+                        <p style="margin-bottom: 15px; color: #FFFFFF;"><strong style="color: #8ab4f8; font-size: 1.05rem;">Competitive Positioning:</strong> Among a field of 23 sponsors, Abu Dhabi has successfully positioned itself as a Tier 1 sponsor with 21% awareness, achieving the second-highest recognition level overall. This places the destination in an elite category alongside TD Bank (34%), significantly outperforming established brands like Nike (9%) and Gatorade (6%).</p>
+                        <p style="margin-bottom: 15px; color: #FFFFFF;"><strong style="color: #8ab4f8; font-size: 1.05rem;">Growth Leadership:</strong> With a 2000% relative growth from baseline (1% → 21%), Abu Dhabi demonstrates the highest growth trajectory among all 23 sponsors. This exceptional performance highlights the effectiveness of the sponsorship activation strategy in rapidly building brand recognition from a minimal baseline.</p>
+                        <p style="margin-bottom: 15px; color: #FFFFFF;"><strong style="color: #8ab4f8; font-size: 1.05rem;">Category Disruption:</strong> As a destination sponsor, Abu Dhabi has successfully disrupted the traditional sponsorship landscape dominated by financial services, apparel, and beverage brands. This differentiation likely contributes to its memorability and breakthrough performance.</p>
+                        <p style="margin-bottom: 0; color: #FFFFFF;"><strong style="color: #8ab4f8; font-size: 1.05rem;">Competitive Dynamics:</strong> The sponsorship landscape shows significant volatility, with several established sponsors showing declining awareness (Vistaprint -29%, Dunkin -44%). This creates an opportunity for Abu Dhabi to further consolidate its position as a leading sponsor through continued activation and engagement strategies.</p>
                     </div>
                 </section>
                 
@@ -1520,11 +1787,18 @@
                     </div>
                     
                     <!-- Strategic Impact Summary -->
-                    <div class="strategy-summary" style="background-color: #103821; border-left: 4px solid #BA9653; padding: 24px 28px; margin: 30px 0; border-radius: 0 var(--radius) var(--radius) 0; box-shadow: var(--shadow-md);">
-                        <h3 style="color: #FFFFFF; margin-bottom: 15px; font-size: 1.3rem;"><i class="fas fa-globe" style="color: #BA9653;"></i> Destination Awareness Impact Story</h3>
-                        <p style="margin-bottom: 15px; color: #FFFFFF; line-height: 1.6;">The Boston Celtics sponsorship has created a powerful dual impact on Abu Dhabi's presence in the New England market: a <strong style="color: #00A94F;">remarkable 27 percentage point increase</strong> in destination awareness among fans (84% relative growth) alongside a <strong style="color: #BA9653;">significant 9 percentage point lift</strong> in general population awareness (50% relative growth).</p>
-                        <p style="margin-bottom: 15px; color: #FFFFFF; line-height: 1.6;">While the sponsorship created a <strong style="color: #00A94F;">widening awareness gap</strong> between fans and the general population (expanding from 14pp to 32pp), the general population growth demonstrates how sports partnerships can efficiently target core audiences while simultaneously building broader market presence.</p>
+                    <div class="strategy-summary" style="background-color: #1a2233; border-left: 4px solid #fbbc04; padding: 24px 28px; margin: 30px 0; border-radius: 0 var(--radius) var(--radius) 0; box-shadow: var(--shadow-md);">
+                        <h3 style="color: #FFFFFF; margin-bottom: 15px; font-size: 1.3rem;"><i class="fas fa-globe" style="color: #fbbc04;"></i> Destination Awareness Impact Story</h3>
+                        <p style="margin-bottom: 15px; color: #FFFFFF; line-height: 1.6;">The Boston Celtics sponsorship has created a powerful dual impact on Abu Dhabi's presence in the New England market: a <strong style="color: #8ab4f8;">remarkable 27 percentage point increase</strong> in destination awareness among fans (84% relative growth) alongside a <strong style="color: #fbbc04;">significant 9 percentage point lift</strong> in general population awareness (50% relative growth).</p>
+                        <p style="margin-bottom: 15px; color: #FFFFFF; line-height: 1.6;">While the sponsorship created a <strong style="color: #8ab4f8;">widening awareness gap</strong> between fans and the general population (expanding from 14pp to 32pp), the general population growth demonstrates how sports partnerships can efficiently target core audiences while simultaneously building broader market presence.</p>
                         <p style="color: #FFFFFF; line-height: 1.6;">The consistent growth across both audience segments indicates that the sponsorship continues to build momentum, with each activation wave further cementing Abu Dhabi in the minds of both Celtics fans and the broader New England population as a premier travel destination.</p>
+                    </div>
+                    <div class="strategy-summary" style="background-color: #1a2233; border-left: 4px solid #fbbc04; padding: 24px 28px; margin-bottom: 30px; border-radius: 0 var(--radius) var(--radius) 0; box-shadow: var(--shadow-md); background-image: linear-gradient(135deg, #1a2233, #141c2b);">
+                        <h3 style="color: #FFFFFF; margin-bottom: 15px; font-size: 1.3rem;"><i class="fas fa-lightbulb" style="color: #fbbc04;"></i> Strategic Recommendations</h3>
+                        <p style="margin-bottom: 15px; color: #FFFFFF;"><strong style="color: #8ab4f8; font-size: 1.05rem;">Funnel Optimization Strategy:</strong> Develop a coordinated cross-channel strategy that addresses each stage of the marketing funnel: create targeted content addressing specific questions fans are searching for (consideration stage), develop interactive social media campaigns featuring Celtics players experiencing Abu Dhabi (engagement stage), and implement website conversion optimization with Celtics-themed travel packages (intent stage).</p>
+                        <p style="margin-bottom: 15px; color: #FFFFFF;"><strong style="color: #8ab4f8; font-size: 1.05rem;">Experiential Marketing Innovation:</strong> Capitalize on the correlation between in-stadium attendance (55%) and travel interest (15%) by creating immersive in-stadium experiences that transport fans to Abu Dhabi virtually. Implement AR/VR installations showcasing Abu Dhabi's attractions during home games to drive deeper engagement and travel consideration.</p>
+                        <p style="margin-bottom: 15px; color: #FFFFFF;"><strong style="color: #fbbc04; font-size: 1.05rem;">Competitive Opportunity Exploitation:</strong> With several established sponsors showing declining awareness, there's an opportunity to further consolidate Abu Dhabi's position through increased share of voice and strategic placement during broadcasts and in-stadium. Leverage the volatility in the sponsorship landscape to negotiate enhanced visibility and exclusive activations.</p>
+                        <p style="margin-bottom: 0; color: #FFFFFF;"><strong style="color: #8ab4f8; font-size: 1.05rem;">Cross-Market Amplification:</strong> Leverage the significant general population awareness growth by developing content that appeals to both dedicated fans and the broader New England market. Create campaigns that highlight the connection between Boston's rich history and Abu Dhabi's blend of tradition and innovation, maximizing the sponsorship's total market impact while maintaining the authentic Celtics connection.</p>
                     </div>
                 </section>
                 
@@ -1621,12 +1895,12 @@
                         <p>While creating powerful targeted impact among fans (59% awareness, +27pp growth), the sponsorship simultaneously delivers significant spillover to the general population (27% awareness, +9pp growth). The gap between fan and general population awareness has widened from +14pp to +32pp, demonstrating both the sponsorship's targeted effectiveness and its broader market penetration capabilities.</p>
                     </div>
                     
-                    <div class="strategy-summary" style="background-color: #103821; border-left: 4px solid #BA9653; padding: 24px 28px; margin-bottom: 30px; border-radius: 0 var(--radius) var(--radius) 0; box-shadow: var(--shadow-md); background-image: linear-gradient(135deg, #103821, #0A2718);">
-                        <h3 style="color: #FFFFFF; margin-bottom: 15px; font-size: 1.3rem;"><i class="fas fa-lightbulb" style="color: #BA9653;"></i> Strategic Recommendations</h3>
-                        <p style="margin-bottom: 15px; color: #FFFFFF;"><strong style="color: #00A94F; font-size: 1.05rem;">Funnel Optimization Strategy:</strong> Develop a coordinated cross-channel strategy that addresses each stage of the marketing funnel: create targeted content addressing specific questions fans are searching for (consideration stage), develop interactive social media campaigns featuring Celtics players experiencing Abu Dhabi (engagement stage), and implement website conversion optimization with Celtics-themed travel packages (intent stage).</p>
-                        <p style="margin-bottom: 15px; color: #FFFFFF;"><strong style="color: #00A94F; font-size: 1.05rem;">Experiential Marketing Innovation:</strong> Capitalize on the correlation between in-stadium attendance (55%) and travel interest (15%) by creating immersive in-stadium experiences that transport fans to Abu Dhabi virtually. Implement AR/VR installations showcasing Abu Dhabi's attractions during home games to drive deeper engagement and travel consideration.</p>
-                        <p style="margin-bottom: 15px; color: #FFFFFF;"><strong style="color: #BA9653; font-size: 1.05rem;">Competitive Opportunity Exploitation:</strong> With several established sponsors showing declining awareness, there's an opportunity to further consolidate Abu Dhabi's position through increased share of voice and strategic placement during broadcasts and in-stadium. Leverage the volatility in the sponsorship landscape to negotiate enhanced visibility and exclusive activations.</p>
-                        <p style="margin-bottom: 0; color: #FFFFFF;"><strong style="color: #00A94F; font-size: 1.05rem;">Cross-Market Amplification:</strong> Leverage the significant general population awareness growth by developing content that appeals to both dedicated fans and the broader New England market. Create campaigns that highlight the connection between Boston's rich history and Abu Dhabi's blend of tradition and innovation, maximizing the sponsorship's total market impact while maintaining the authentic Celtics connection.</p>
+                    <div class="strategy-summary" style="background-color: #1a2233; border-left: 4px solid #fbbc04; padding: 24px 28px; margin-bottom: 30px; border-radius: 0 var(--radius) var(--radius) 0; box-shadow: var(--shadow-md); background-image: linear-gradient(135deg, #1a2233, #141c2b);">
+                        <h3 style="color: #FFFFFF; margin-bottom: 15px; font-size: 1.3rem;"><i class="fas fa-lightbulb" style="color: #fbbc04;"></i> Strategic Recommendations</h3>
+                        <p style="margin-bottom: 15px; color: #FFFFFF;"><strong style="color: #8ab4f8; font-size: 1.05rem;">Funnel Optimization Strategy:</strong> Develop a coordinated cross-channel strategy that addresses each stage of the marketing funnel: create targeted content addressing specific questions fans are searching for (consideration stage), develop interactive social media campaigns featuring Celtics players experiencing Abu Dhabi (engagement stage), and implement website conversion optimization with Celtics-themed travel packages (intent stage).</p>
+                        <p style="margin-bottom: 15px; color: #FFFFFF;"><strong style="color: #8ab4f8; font-size: 1.05rem;">Experiential Marketing Innovation:</strong> Capitalize on the correlation between in-stadium attendance (55%) and travel interest (15%) by creating immersive in-stadium experiences that transport fans to Abu Dhabi virtually. Implement AR/VR installations showcasing Abu Dhabi's attractions during home games to drive deeper engagement and travel consideration.</p>
+                        <p style="margin-bottom: 15px; color: #FFFFFF;"><strong style="color: #fbbc04; font-size: 1.05rem;">Competitive Opportunity Exploitation:</strong> With several established sponsors showing declining awareness, there's an opportunity to further consolidate Abu Dhabi's position through increased share of voice and strategic placement during broadcasts and in-stadium. Leverage the volatility in the sponsorship landscape to negotiate enhanced visibility and exclusive activations.</p>
+                        <p style="margin-bottom: 0; color: #FFFFFF;"><strong style="color: #8ab4f8; font-size: 1.05rem;">Cross-Market Amplification:</strong> Leverage the significant general population awareness growth by developing content that appeals to both dedicated fans and the broader New England market. Create campaigns that highlight the connection between Boston's rich history and Abu Dhabi's blend of tradition and innovation, maximizing the sponsorship's total market impact while maintaining the authentic Celtics connection.</p>
                     </div>
                 </section>
                 
