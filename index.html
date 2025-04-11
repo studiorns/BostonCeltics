@@ -682,9 +682,9 @@
         
         /* Section Collapsible Styles */
         .section-content {
-            max-height: 1000px;
+            max-height: 5000px; /* Increased from 1000px to accommodate larger sections */
             overflow: hidden;
-            transition: max-height 0.5s ease;
+            transition: max-height 0.8s ease; /* Slightly longer transition for smoother animation with larger content */
             opacity: 1;
         }
         
@@ -1418,13 +1418,13 @@
                         <!-- Tier 1 -->
                         <div style="background: linear-gradient(90deg, rgba(0,122,51,0.15), rgba(0,0,0,0)); border-radius: var(--radius); padding: 20px; margin-bottom: 20px; border-left: 4px solid var(--primary);">
                             <h4 style="color: var(--primary); margin-bottom: 15px; font-size: 1.1rem;">Tier 1: Elite Recognition (>20%)</h4>
-                            <div class="grid-2" style="grid-template-columns: repeat(2, 1fr); gap: 15px;">
-                                <div style="background: rgba(0,0,0,0.2); border-radius: var(--radius); padding: 15px; display: flex; align-items: center; justify-content: space-between;">
-                                    <span style="font-weight: 600; color: var(--gray-800);">TD Bank</span>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px;">
+                                <div style="background: rgba(0,0,0,0.2); border-radius: var(--radius); padding: 15px; display: flex; flex-direction: column; align-items: center; text-align: center;">
+                                    <span style="font-weight: 600; color: var(--gray-800); margin-bottom: 8px;">TD Bank</span>
                                     <span style="font-weight: 700; font-size: 1.2rem; color: var(--primary);">34%</span>
                                 </div>
-                                <div style="background: rgba(0,0,0,0.2); border-radius: var(--radius); padding: 15px; display: flex; align-items: center; justify-content: space-between;">
-                                    <span style="font-weight: 600; color: var(--gray-800);">Abu Dhabi</span>
+                                <div style="background: rgba(0,0,0,0.2); border-radius: var(--radius); padding: 15px; display: flex; flex-direction: column; align-items: center; text-align: center;">
+                                    <span style="font-weight: 600; color: var(--gray-800); margin-bottom: 8px;">Abu Dhabi</span>
                                     <span style="font-weight: 700; font-size: 1.2rem; color: var(--primary);">21%</span>
                                 </div>
                             </div>
@@ -1433,13 +1433,13 @@
                         <!-- Tier 2 -->
                         <div style="background: linear-gradient(90deg, rgba(186,150,83,0.15), rgba(0,0,0,0)); border-radius: var(--radius); padding: 20px; margin-bottom: 20px; border-left: 4px solid #BA9653;">
                             <h4 style="color: #BA9653; margin-bottom: 15px; font-size: 1.1rem;">Tier 2: Strong Recognition (10-20%)</h4>
-                            <div class="grid-2" style="grid-template-columns: repeat(2, 1fr); gap: 15px;">
-                                <div style="background: rgba(0,0,0,0.2); border-radius: var(--radius); padding: 15px; display: flex; align-items: center; justify-content: space-between;">
-                                    <span style="font-weight: 600; color: var(--gray-800);">Vistaprint</span>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px;">
+                                <div style="background: rgba(0,0,0,0.2); border-radius: var(--radius); padding: 15px; display: flex; flex-direction: column; align-items: center; text-align: center;">
+                                    <span style="font-weight: 600; color: var(--gray-800); margin-bottom: 8px;">Vistaprint</span>
                                     <span style="font-weight: 700; font-size: 1.2rem; color: #BA9653;">12%</span>
                                 </div>
-                                <div style="background: rgba(0,0,0,0.2); border-radius: var(--radius); padding: 15px; display: flex; align-items: center; justify-content: space-between;">
-                                    <span style="font-weight: 600; color: var(--gray-800);">JetBlue</span>
+                                <div style="background: rgba(0,0,0,0.2); border-radius: var(--radius); padding: 15px; display: flex; flex-direction: column; align-items: center; text-align: center;">
+                                    <span style="font-weight: 600; color: var(--gray-800); margin-bottom: 8px;">JetBlue</span>
                                     <span style="font-weight: 700; font-size: 1.2rem; color: #BA9653;">12%</span>
                                 </div>
                             </div>
@@ -1448,17 +1448,17 @@
                         <!-- Tier 3 -->
                         <div style="background: linear-gradient(90deg, rgba(255,255,255,0.1), rgba(0,0,0,0)); border-radius: var(--radius); padding: 20px; margin-bottom: 20px; border-left: 4px solid var(--gray-600);">
                             <h4 style="color: var(--gray-600); margin-bottom: 15px; font-size: 1.1rem;">Tier 3: Moderate Recognition (5-9%)</h4>
-                            <div class="grid-3" style="grid-template-columns: repeat(3, 1fr); gap: 15px;">
-                                <div style="background: rgba(0,0,0,0.2); border-radius: var(--radius); padding: 15px; display: flex; align-items: center; justify-content: space-between;">
-                                    <span style="font-weight: 600; color: var(--gray-800);">Nike</span>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px;">
+                                <div style="background: rgba(0,0,0,0.2); border-radius: var(--radius); padding: 15px; display: flex; flex-direction: column; align-items: center; text-align: center;">
+                                    <span style="font-weight: 600; color: var(--gray-800); margin-bottom: 8px;">Nike</span>
                                     <span style="font-weight: 700; font-size: 1.2rem; color: var(--gray-600);">9%</span>
                                 </div>
-                                <div style="background: rgba(0,0,0,0.2); border-radius: var(--radius); padding: 15px; display: flex; align-items: center; justify-content: space-between;">
-                                    <span style="font-weight: 600; color: var(--gray-800);">General Electric</span>
+                                <div style="background: rgba(0,0,0,0.2); border-radius: var(--radius); padding: 15px; display: flex; flex-direction: column; align-items: center; text-align: center;">
+                                    <span style="font-weight: 600; color: var(--gray-800); margin-bottom: 8px;">General Electric</span>
                                     <span style="font-weight: 700; font-size: 1.2rem; color: var(--gray-600);">7%</span>
                                 </div>
-                                <div style="background: rgba(0,0,0,0.2); border-radius: var(--radius); padding: 15px; display: flex; align-items: center; justify-content: space-between;">
-                                    <span style="font-weight: 600; color: var(--gray-800);">Gatorade</span>
+                                <div style="background: rgba(0,0,0,0.2); border-radius: var(--radius); padding: 15px; display: flex; flex-direction: column; align-items: center; text-align: center;">
+                                    <span style="font-weight: 600; color: var(--gray-800); margin-bottom: 8px;">Gatorade</span>
                                     <span style="font-weight: 700; font-size: 1.2rem; color: var(--gray-600);">6%</span>
                                 </div>
                             </div>
@@ -1467,17 +1467,17 @@
                         <!-- Tier 4 -->
                         <div style="background: linear-gradient(90deg, rgba(255,255,255,0.05), rgba(0,0,0,0)); border-radius: var(--radius); padding: 20px; border-left: 4px solid var(--gray-400);">
                             <h4 style="color: var(--gray-400); margin-bottom: 15px; font-size: 1.1rem;">Tier 4: Emerging Recognition (<5%)</h4>
-                            <div class="grid-3" style="grid-template-columns: repeat(3, 1fr); gap: 15px;">
-                                <div style="background: rgba(0,0,0,0.2); border-radius: var(--radius); padding: 15px; display: flex; align-items: center; justify-content: space-between;">
-                                    <span style="font-weight: 600; color: var(--gray-800);">Dunkin</span>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px;">
+                                <div style="background: rgba(0,0,0,0.2); border-radius: var(--radius); padding: 15px; display: flex; flex-direction: column; align-items: center; text-align: center;">
+                                    <span style="font-weight: 600; color: var(--gray-800); margin-bottom: 8px;">Dunkin</span>
                                     <span style="font-weight: 700; font-size: 1.2rem; color: var(--gray-400);">5%</span>
                                 </div>
-                                <div style="background: rgba(0,0,0,0.2); border-radius: var(--radius); padding: 15px; display: flex; align-items: center; justify-content: space-between;">
-                                    <span style="font-weight: 600; color: var(--gray-800);">Bentley University</span>
+                                <div style="background: rgba(0,0,0,0.2); border-radius: var(--radius); padding: 15px; display: flex; flex-direction: column; align-items: center; text-align: center;">
+                                    <span style="font-weight: 600; color: var(--gray-800); margin-bottom: 8px;">Bentley University</span>
                                     <span style="font-weight: 700; font-size: 1.2rem; color: var(--gray-400);">4%</span>
                                 </div>
-                                <div style="background: rgba(0,0,0,0.2); border-radius: var(--radius); padding: 15px; display: flex; align-items: center; justify-content: space-between;">
-                                    <span style="font-weight: 600; color: var(--gray-800);">Draftkings</span>
+                                <div style="background: rgba(0,0,0,0.2); border-radius: var(--radius); padding: 15px; display: flex; flex-direction: column; align-items: center; text-align: center;">
+                                    <span style="font-weight: 600; color: var(--gray-800); margin-bottom: 8px;">Draftkings</span>
                                     <span style="font-weight: 700; font-size: 1.2rem; color: var(--gray-400);">4%</span>
                                 </div>
                             </div>
@@ -1862,13 +1862,7 @@
                         <p style="margin-bottom: 15px; color: #FFFFFF; line-height: 1.6;">While the sponsorship created a <strong style="color: #8ab4f8;">widening awareness gap</strong> between fans and the general population (expanding from 14pp to 32pp), the general population growth demonstrates how sports partnerships can efficiently target core audiences while simultaneously building broader market presence.</p>
                         <p style="color: #FFFFFF; line-height: 1.6;">The consistent growth across both audience segments indicates that the sponsorship continues to build momentum, with each activation wave further cementing Abu Dhabi in the minds of both Celtics fans and the broader New England population as a premier travel destination.</p>
                     </div>
-                    <div class="strategy-summary" style="background-color: #1a2233; border-left: 4px solid #fbbc04; padding: 24px 28px; margin-bottom: 30px; border-radius: 0 var(--radius) var(--radius) 0; box-shadow: var(--shadow-md); background-image: linear-gradient(135deg, #1a2233, #141c2b);">
-                        <h3 style="color: #FFFFFF; margin-bottom: 15px; font-size: 1.3rem;"><i class="fas fa-lightbulb" style="color: #fbbc04;"></i> Strategic Recommendations</h3>
-                        <p style="margin-bottom: 15px; color: #FFFFFF;"><strong style="color: #8ab4f8; font-size: 1.05rem;">Funnel Optimization Strategy:</strong> Develop a coordinated cross-channel strategy that addresses each stage of the marketing funnel: create targeted content addressing specific questions fans are searching for (consideration stage), develop interactive social media campaigns featuring Celtics players experiencing Abu Dhabi (engagement stage), and implement website conversion optimization with Celtics-themed travel packages (intent stage).</p>
-                        <p style="margin-bottom: 15px; color: #FFFFFF;"><strong style="color: #8ab4f8; font-size: 1.05rem;">Experiential Marketing Innovation:</strong> Capitalize on the correlation between in-stadium attendance (55%) and travel interest (15%) by creating immersive in-stadium experiences that transport fans to Abu Dhabi virtually. Implement AR/VR installations showcasing Abu Dhabi's attractions during home games to drive deeper engagement and travel consideration.</p>
-                        <p style="margin-bottom: 15px; color: #FFFFFF;"><strong style="color: #fbbc04; font-size: 1.05rem;">Competitive Opportunity Exploitation:</strong> With several established sponsors showing declining awareness, there's an opportunity to further consolidate Abu Dhabi's position through increased share of voice and strategic placement during broadcasts and in-stadium. Leverage the volatility in the sponsorship landscape to negotiate enhanced visibility and exclusive activations.</p>
-                        <p style="margin-bottom: 0; color: #FFFFFF;"><strong style="color: #8ab4f8; font-size: 1.05rem;">Cross-Market Amplification:</strong> Leverage the significant general population awareness growth by developing content that appeals to both dedicated fans and the broader New England market. Create campaigns that highlight the connection between Boston's rich history and Abu Dhabi's blend of tradition and innovation, maximizing the sponsorship's total market impact while maintaining the authentic Celtics connection.</p>
-                    </div>
+                    <!-- Strategic Recommendations section removed as requested -->
                 </section>
                 
                 <!-- Fan Engagement Section -->
