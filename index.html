@@ -680,6 +680,55 @@
             color: var(--gray-700);
         }
         
+        /* Section Collapsible Styles */
+        .section-content {
+            max-height: 1000px;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            opacity: 1;
+        }
+        
+        .section-content.collapsed {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        
+        .section-toggle {
+            background: transparent;
+            border: none;
+            color: var(--primary);
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            padding: 0;
+            margin-left: 10px;
+        }
+        
+        .section-toggle:hover {
+            background-color: rgba(66, 133, 244, 0.1);
+            transform: scale(1.1);
+        }
+        
+        .section-toggle:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.3);
+        }
+        
+        .section-toggle i {
+            transition: transform 0.3s ease;
+            font-size: 16px;
+        }
+        
+        .section-toggle.collapsed i {
+            transform: rotate(-180deg);
+        }
+        
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -1133,7 +1182,11 @@
                 <section id="methodology" class="section">
                     <div class="section-header">
                         <h2 class="section-title"><i class="fas fa-clipboard-list"></i> Study Methodology</h2>
+                        <button class="section-toggle collapsed" aria-label="Toggle section" aria-expanded="false">
+                            <i class="fas fa-chevron-up"></i>
+                        </button>
                     </div>
+                    <div class="section-content collapsed">
                     
                     <div class="insight-summary">
                         <h3><i class="fas fa-info-circle"></i> Research Overview</h3>
@@ -1176,7 +1229,11 @@
                 <section id="fan-behavior" class="section">
                     <div class="section-header">
                         <h2 class="section-title"><i class="fas fa-users"></i> How, Where & When Boston Celtics Fans Engage</h2>
+                        <button class="section-toggle collapsed" aria-label="Toggle section" aria-expanded="false">
+                            <i class="fas fa-chevron-up"></i>
+                        </button>
                     </div>
+                    <div class="section-content collapsed">
                     
                     <div class="insight-summary">
                         <h3><i class="fas fa-lightbulb"></i> Fan Behavior Overview</h3>
@@ -1264,7 +1321,11 @@
                 <section id="sponsorship-awareness" class="section">
                     <div class="section-header">
                         <h2 class="section-title"><i class="fas fa-chart-line"></i> Sponsorship Awareness Growth</h2>
+                        <button class="section-toggle collapsed" aria-label="Toggle section" aria-expanded="false">
+                            <i class="fas fa-chevron-up"></i>
+                        </button>
                     </div>
+                    <div class="section-content collapsed">
                     
                     <div class="insight-summary">
                         <h3><i class="fas fa-lightbulb"></i> Key Awareness Insights</h3>
@@ -1337,7 +1398,11 @@
                 <section id="sponsorship-brand-comparison" class="section">
                     <div class="section-header">
                         <h2 class="section-title"><i class="fas fa-trophy"></i> Sponsorship Brand Comparison</h2>
+                        <button class="section-toggle collapsed" aria-label="Toggle section" aria-expanded="false">
+                            <i class="fas fa-chevron-up"></i>
+                        </button>
                     </div>
+                    <div class="section-content collapsed">
                     
                     <div class="insight-summary">
                         <h3><i class="fas fa-lightbulb"></i> Key Brand Awareness Insights</h3>
@@ -1574,7 +1639,11 @@
                 <section id="destination-awareness" class="section">
                     <div class="section-header">
                         <h2 class="section-title"><i class="fas fa-globe"></i> Impact on Destination Awareness</h2>
+                        <button class="section-toggle collapsed" aria-label="Toggle section" aria-expanded="false">
+                            <i class="fas fa-chevron-up"></i>
+                        </button>
                     </div>
+                    <div class="section-content collapsed">
                     
                     <div class="insight-summary">
                         <h3><i class="fas fa-lightbulb"></i> Key Destination Awareness Insights</h3>
@@ -1806,7 +1875,11 @@
                 <section id="fan-engagement" class="section">
                     <div class="section-header">
                         <h2 class="section-title"><i class="fas fa-handshake"></i> Fan Engagement</h2>
+                        <button class="section-toggle collapsed" aria-label="Toggle section" aria-expanded="false">
+                            <i class="fas fa-chevron-up"></i>
+                        </button>
                     </div>
+                    <div class="section-content collapsed">
                     
                     <div class="insight-summary">
                         <h3><i class="fas fa-lightbulb"></i> Key Fan Engagement Insights</h3>
@@ -1873,7 +1946,11 @@
                 <section id="insights" class="section">
                     <div class="section-header">
                         <h2 class="section-title"><i class="fas fa-lightbulb"></i> Insights & Recommendations</h2>
+                        <button class="section-toggle collapsed" aria-label="Toggle section" aria-expanded="false">
+                            <i class="fas fa-chevron-up"></i>
+                        </button>
                     </div>
+                    <div class="section-content collapsed">
                     
                     <div class="insight-summary">
                         <h3><i class="fas fa-chart-line"></i> Accelerating Growth Momentum</h3>
@@ -2019,6 +2096,33 @@
                     
                     // Update the aria-label for accessibility
                     this.setAttribute('aria-label', isExpanded ? 'Hide details' : 'Show details');
+                });
+            });
+            
+            // Section toggle functionality
+            const sectionToggleButtons = document.querySelectorAll('.section-toggle');
+            
+            // Add click event to each section toggle button
+            sectionToggleButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Toggle the collapsed class on the button
+                    this.classList.toggle('collapsed');
+                    
+                    // Get the parent section
+                    const section = this.closest('.section');
+                    
+                    // Get the section content
+                    const content = section.querySelector('.section-content');
+                    
+                    // Toggle the collapsed class on the section content
+                    content.classList.toggle('collapsed');
+                    
+                    // Update the aria-expanded attribute for accessibility
+                    const isExpanded = !content.classList.contains('collapsed');
+                    this.setAttribute('aria-expanded', isExpanded);
+                    
+                    // Update the aria-label for accessibility
+                    this.setAttribute('aria-label', isExpanded ? 'Collapse section' : 'Expand section');
                 });
             });
         });
