@@ -333,6 +333,7 @@
         .grid-2, .grid-3 {
             display: grid;
             grid-template-columns: 1fr;
+            grid-auto-rows: min-content; /* Allow rows to expand based on content */
             gap: 15px;
         }
         
@@ -348,7 +349,7 @@
             display: flex;
             flex-direction: column;
             position: relative;
-            overflow: hidden;
+            overflow: visible; /* Ensure expanded content is visible */
             margin-bottom: 15px;
         }
         
@@ -659,7 +660,7 @@
         }
         
         .card-details.expanded {
-            max-height: 300px;
+            max-height: none; /* Remove height restriction to show all content */
             opacity: 1;
             margin-top: 12px;
             padding-top: 12px;
@@ -1052,6 +1053,21 @@
             .insight-summary p {
                 font-size: 0.95rem;
                 line-height: 1.5;
+            }
+        }
+        
+        /* Responsive styles for the metrics container */
+        @media (min-width: 768px) {
+            .metrics-container {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+        }
+        
+        /* Adjust grid layout for mobile view */
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr; /* Single column layout */
             }
         }
         
@@ -1601,20 +1617,20 @@
                         <div style="background: linear-gradient(135deg, rgba(0,122,51,0.05), rgba(0,0,0,0.1)); border-radius: var(--radius); padding: 25px; border: 1px solid var(--gray-300);">
                             <h4 style="color: var(--primary); margin-bottom: 20px; font-size: 1.1rem; text-align: center;">Abu Dhabi's Competitive Position (Wave 2 → Wave 3)</h4>
                             
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 30px;">
-                                <div style="text-align: center; flex: 1;">
-                                    <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary); margin-bottom: 5px;">2nd</div>
-                                    <div style="font-size: 0.9rem; color: var(--gray-600);">Overall Rank</div>
-                                </div>
-                                <div style="text-align: center; flex: 1;">
-                                    <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary); margin-bottom: 5px;">2nd</div>
-                                    <div style="font-size: 0.9rem; color: var(--gray-600);">Relative Growth Rank</div>
-                                </div>
-                                <div style="text-align: center; flex: 1;">
-                                    <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary); margin-bottom: 5px;">250%</div>
-                                    <div style="font-size: 0.9rem; color: var(--gray-600);">Relative Growth</div>
-                                </div>
-                            </div>
+<div class="metrics-container" style="display: flex; flex-direction: column; align-items: center; gap: 15px; margin-bottom: 30px;">
+    <div style="text-align: center;">
+        <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary); margin-bottom: 5px;">2nd</div>
+        <div style="font-size: 0.9rem; color: var(--gray-600);">Overall Rank</div>
+    </div>
+    <div style="text-align: center;">
+        <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary); margin-bottom: 5px;">2nd</div>
+        <div style="font-size: 0.9rem; color: var(--gray-600);">Relative Growth Rank</div>
+    </div>
+    <div style="text-align: center;">
+        <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary); margin-bottom: 5px;">250%</div>
+        <div style="font-size: 0.9rem; color: var(--gray-600);">Relative Growth</div>
+    </div>
+</div>
                             
                             <p style="color: var(--gray-800); background: rgba(0,122,51,0.1); padding: 15px; border-radius: var(--radius); font-weight: 500; margin-bottom: 0;">
                                 Between May 2024 and March 2025, Abu Dhabi achieved the <strong style="color: var(--primary);">highest percentage point growth</strong> (+15pp) among all Boston Celtics sponsors, outpacing even TD Bank (+16pp) in relative terms with a <strong style="color: var(--primary);">250% growth rate</strong>. This exceptional performance in the most recent period demonstrates the accelerating momentum of the sponsorship as it matures in the market.
@@ -1651,7 +1667,7 @@
                     </div>
                     
                     <!-- Impact Metrics Grid -->
-                    <div class="grid-2" style="grid-template-columns: repeat(2, 1fr);">
+                    <div class="grid-2">
                         <div class="data-card">
                             <div class="card-header">
                                 <div class="metric-name">
